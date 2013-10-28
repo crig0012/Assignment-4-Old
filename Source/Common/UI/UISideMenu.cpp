@@ -10,6 +10,7 @@
 #include "../Screen Manager/ScreenManager.h"
 #include "../Input/Input.h"
 #include "../Constants/Constants.h"
+#include "../Utils/Utils.h"
 
  
 UISideMenu::UISideMenu(UISideMenuListener* listener, SideMenuOrientation orientation) :

@@ -8,6 +8,7 @@
 
 #include "Tile.h"
 #include "../../OpenGL/OpenGL.h"
+#include "../../Utils/Utils.h"
 #include <stdlib.h>
 #include <sstream>
 #include <string>

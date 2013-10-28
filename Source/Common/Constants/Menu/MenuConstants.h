@@ -16,6 +16,5 @@ extern const float MENU_ITEMS_STARTING_Y_PERCENTAGE;
 extern const float MENU_ITEMS_SPACER_PERCENTAGE;
 
 extern const char* MAIN_MENU_SCREEN_NAME;
-extern const char* LEVEL_SELECT_NAME;
 
 #endif /* defined(__GAM_1514_OSX_Game__MenuConstants__) */

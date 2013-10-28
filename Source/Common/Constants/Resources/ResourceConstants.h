@@ -11,11 +11,6 @@ extern const char* RES_TILE_SCORE_NUMBERS[];
 extern const int RES_TILE_SCORE_NUMBERS_COUNT;
 
 //Tiles
-extern const char* RES_TILE_WATER;
-extern const char* RES_TILE_WALL;
 extern const char* RES_TILE_GROUND;
-extern const char* RES_TILE_FLOOR;
-extern const char* RES_TILE_CARPET;
-extern const char* RES_TILE_TREE;
 
 #endif 

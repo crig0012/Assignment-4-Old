@@ -56,6 +56,27 @@
     <Filter Include="Libraries\jsoncpp">
       <UniqueIdentifier>{c5d2eb9c-b720-42c5-9fae-0fef8e19f9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Game\Tiles">
+      <UniqueIdentifier>{36fa2c03-22f4-459a-9bb1-6619013f6d4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menus">
+      <UniqueIdentifier>{cee36e4f-565c-4008-b716-8c6c803bbb5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{7157ca52-6940-4a95-b7f3-c2a4cb703f80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level Editor">
+      <UniqueIdentifier>{64fe5859-db83-4f12-985b-4e988cc2e43c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Constants\Menu">
+      <UniqueIdentifier>{f3ac26bb-fe05-4684-acb9-382423a8d844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Constants\Level">
+      <UniqueIdentifier>{3c42fb77-d303-4725-bb4b-27c0167c98f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Constants\Resources">
+      <UniqueIdentifier>{7e79ef44-6581-4982-82cd-ac848cf3e989}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -223,6 +244,51 @@
     <ClCompile Include="..\..\Common\Input\MouseEvent.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Game\GameObject.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Level.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Player.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\GroundTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\Tile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\MainMenu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Menu.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\UI\UIButton.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\UI\UISideMenu.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\UI\UIToggle.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Level Editor\LevelEditor.cpp">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureCache.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Constants\Menu\MenuConstants.cpp">
+      <Filter>Source Files\Constants\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Constants\Level\LevelConstants.cpp">
+      <Filter>Source Files\Constants\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Constants\Resources\ResourceConstants.cpp">
+      <Filter>Source Files\Constants\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -389,6 +455,51 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Input\MouseEvent.h">
       <Filter>Source Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\GameObject.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Level.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Player.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\GroundTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\Tile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\MainMenu.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Menu.h">
+      <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\UI\UIButton.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\UI\UISideMenu.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\UI\UIToggle.h">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Level Editor\LevelEditor.h">
+      <Filter>Source Files\Level Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureCache.h">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Constants\Menu\MenuConstants.h">
+      <Filter>Source Files\Constants\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Constants\Level\LevelConstants.h">
+      <Filter>Source Files\Constants\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Constants\Resources\ResourceConstants.h">
+      <Filter>Source Files\Constants\Resources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

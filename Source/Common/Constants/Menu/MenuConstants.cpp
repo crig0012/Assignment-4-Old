@@ -16,4 +16,3 @@ const float MENU_ITEMS_STARTING_Y_PERCENTAGE = 0.3527f;
 const float MENU_ITEMS_SPACER_PERCENTAGE = 0.1171875f;
 
 const char* MAIN_MENU_SCREEN_NAME = "MainMenu";
-const char* LEVEL_SELECT_NAME = "LevelSelect";

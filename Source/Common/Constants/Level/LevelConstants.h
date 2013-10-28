@@ -14,21 +14,12 @@
 enum TileType
 {
   TileTypeGround = 0,
-  TileTypeTree,
-  TileTypeWater,
-  TileTypeWall,
-  TileTypeFloor,
-  TileTypeCarpet,
   TileTypeUnknown,
   TileTypeCount
 };
 
 //Level editor screen name
 extern const char* LEVEL_EDITOR_SCREEN_NAME;
-
-//Level slot filenames
-#define NUMBER_OF_LEVEL_SLOTS 6
-extern const char* LEVEL_SLOT_FILENAMES[NUMBER_OF_LEVEL_SLOTS];
 
 //Empty Level Constants
 extern const int EMPTY_LEVEL_TILE_SIZE;

@@ -9,6 +9,13 @@
 #ifndef MATH_UTILS_H
 #define MATH_UTILS_H
 
+//min and max defines for windows only
+#if WIN32
+#define fminf(a,b) ((a) < (b) ? (a) : (b))
+#define fmaxf(a,b) ((a) > (b) ? (a) : (b))
+#endif
+
+
 class MathUtils
 {
 public:
@@ -20,7 +27,7 @@ public:
     static float degressToRadians(float degrees);
     
     //Are 2 values within a certain range with each other
-    static bool withinRange(float valueA, float valueB, float range);
+    static bool withinRange(float valueA, float valueB, float range); 
 };
 
 #endif

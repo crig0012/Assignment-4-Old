@@ -11,9 +11,4 @@ const char* RES_TILE_SCORE_NUMBERS[] = {"Numbers0", "Numbers1", "Numbers2", "Num
 const int RES_TILE_SCORE_NUMBERS_COUNT = 10;
 
 //Tiles
-const char* RES_TILE_WATER = "TileWater";
-const char* RES_TILE_WALL = "TileWall";
 const char* RES_TILE_GROUND = "TileGround";
-const char* RES_TILE_FLOOR = "TIleFloor";
-const char* RES_TILE_CARPET = "TileCarpet";
-const char* RES_TILE_TREE = "TileTree";
