@@ -238,7 +238,11 @@ void Level::save(const char* levelName)
 
 TileType Level::getTileTypeForIndex(int index)
 {
-    return TileTypeGround;
+    if(index >= 0 && index < getNumberOfTiles())
+    {
+        return m_Tiles[index]->getTileType();
+    }
+    return TileTypeUnknown;
 }
 
 unsigned int Level::getNumberOfTiles()
