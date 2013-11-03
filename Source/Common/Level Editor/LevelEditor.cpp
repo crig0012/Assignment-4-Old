@@ -23,6 +23,11 @@ LevelEditor::LevelEditor() :
     //Create the Tiles menu items
     m_TilesMenu = new UISideMenu(this, SideMenuRight);
     m_TilesMenu->addButton(new UIToggle("MenuTileGround"));
+	m_TilesMenu->addButton(new UIToggle("MenuTileWater"));
+	/*m_TilesMenu->addButton(new UIToggle("MenuTileWater"));
+	m_TilesMenu->addButton(new UIToggle("MenuTileWater"));
+	m_TilesMenu->addButton(new UIToggle("MenuTileWater"));
+	m_TilesMenu->addButton(new UIToggle("MenuTileWater"));*/
     
     //Create the level object
     m_Level = new Level(true);

@@ -8,6 +8,7 @@ extern const char* GAME_SCREEN_NAME;
 
 //Tile Constants
 extern const char* TILE_GROUND_TYPE;
+extern const char* TILE_WATER_TYPE;
 extern const int TILE_PADDING;
 
 //Player Constants

@@ -12,5 +12,6 @@ extern const int RES_TILE_SCORE_NUMBERS_COUNT;
 
 //Tiles
 extern const char* RES_TILE_GROUND;
+extern const char* RES_TILE_WATER;
 
 #endif 

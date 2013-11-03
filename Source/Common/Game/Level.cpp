@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Tiles/Tile.h"
 #include "Tiles/GroundTile.h"
+#include "Tiles/WaterTile.h"
 #include "../Constants/Constants.h"
 #include "../Input/Input.h"
 #include "../Screen Manager/ScreenManager.h"
@@ -353,6 +354,10 @@ void Level::setTileTypeAtIndex(TileType tileType, int index)
             case TileTypeGround:
                 m_Tiles[index] = new GroundTile();
                 break;
+
+			case TileTypeWater:
+				m_Tiles[index] = new WaterTile();
+				break;
 
             case TileTypeUnknown:
             default:

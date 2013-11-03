@@ -14,6 +14,7 @@
 enum TileType
 {
   TileTypeGround = 0,
+  TileTypeWater = 1,
   TileTypeUnknown,
   TileTypeCount
 };

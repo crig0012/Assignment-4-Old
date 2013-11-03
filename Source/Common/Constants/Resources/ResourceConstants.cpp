@@ -12,3 +12,4 @@ const int RES_TILE_SCORE_NUMBERS_COUNT = 10;
 
 //Tiles
 const char* RES_TILE_GROUND = "TileGround";
+const char* RES_TILE_WATER = "TileWater";

@@ -289,6 +289,9 @@
     <ClCompile Include="..\..\Common\Constants\Resources\ResourceConstants.cpp">
       <Filter>Source Files\Constants\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WaterTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -500,6 +503,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Constants\Resources\ResourceConstants.h">
       <Filter>Source Files\Constants\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WaterTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

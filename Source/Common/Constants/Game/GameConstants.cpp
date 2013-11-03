@@ -6,6 +6,7 @@ const char* GAME_SCREEN_NAME = "Game";
 
 //Tiles Constants
 const char* TILE_GROUND_TYPE = "GroundTile";
+const char* TILE_WATER_TYPE = "WaterTile";
 const int TILE_PADDING = 2;
 
 //Player Constants
