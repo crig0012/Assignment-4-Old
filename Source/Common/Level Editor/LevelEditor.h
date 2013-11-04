@@ -37,6 +37,7 @@ private:
     void sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, int toggleIndex);
     
     UISideMenu* m_TilesMenu;
+	UISideMenu* m_OptionsMenu;
     Level* m_Level;
     
     bool m_IsMouseDown;

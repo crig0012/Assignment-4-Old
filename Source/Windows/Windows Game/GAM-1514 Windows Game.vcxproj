@@ -101,8 +101,12 @@
     <ClCompile Include="..\..\Common\Game\GameObject.cpp" />
     <ClCompile Include="..\..\Common\Game\Level.cpp" />
     <ClCompile Include="..\..\Common\Game\Player.cpp" />
+    <ClCompile Include="..\..\Common\Game\Tiles\ChestTile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\GroundTile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\Tile.cpp" />
+    <ClCompile Include="..\..\Common\Game\Tiles\TowerTile.cpp" />
+    <ClCompile Include="..\..\Common\Game\Tiles\TreeTile.cpp" />
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\WaterTile.cpp" />
     <ClCompile Include="..\..\Common\Input\InputConstants.cpp" />
     <ClCompile Include="..\..\Common\Input\InputEvent.cpp" />
@@ -175,8 +179,12 @@
     <ClInclude Include="..\..\Common\Game\GameObject.h" />
     <ClInclude Include="..\..\Common\Game\Level.h" />
     <ClInclude Include="..\..\Common\Game\Player.h" />
+    <ClInclude Include="..\..\Common\Game\Tiles\ChestTile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\GroundTile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\Tile.h" />
+    <ClInclude Include="..\..\Common\Game\Tiles\TowerTile.h" />
+    <ClInclude Include="..\..\Common\Game\Tiles\TreeTile.h" />
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\WaterTile.h" />
     <ClInclude Include="..\..\Common\Input\Input.h" />
     <ClInclude Include="..\..\Common\Input\InputConstants.h" />

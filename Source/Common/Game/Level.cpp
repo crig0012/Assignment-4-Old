@@ -9,8 +9,12 @@
 #include "Level.h"
 #include "Player.h"
 #include "Tiles/Tile.h"
+#include "Tiles/TreeTile.h"
 #include "Tiles/GroundTile.h"
 #include "Tiles/WaterTile.h"
+#include "Tiles/WallTile.h"
+#include "Tiles/TowerTile.h"
+#include "Tiles/ChestTile.h"
 #include "../Constants/Constants.h"
 #include "../Input/Input.h"
 #include "../Screen Manager/ScreenManager.h"
@@ -344,9 +348,9 @@ void Level::setTileTypeAtIndex(TileType tileType, int index)
         //Delete the tile at the index, if one exists
         if(m_Tiles[index] != NULL)
         {
-            delete m_Tiles[index];
-            m_Tiles[index] = NULL;
-        }
+			delete m_Tiles[index];
+			m_Tiles[index] = NULL;
+		}
         
         //Create the new tile based on the TileType
         switch (tileType)
@@ -357,6 +361,22 @@ void Level::setTileTypeAtIndex(TileType tileType, int index)
 
 			case TileTypeWater:
 				m_Tiles[index] = new WaterTile();
+				break;
+
+			case TileTypeTree:
+				m_Tiles[index] = new TreeTile();
+				break;
+
+			case TileTypeWall:
+				m_Tiles[index] = new WallTile();
+				break;
+
+			case TileTypeTower:
+				m_Tiles[index] = new TowerTile();
+				break;
+
+			case TileTypeChest:
+				m_Tiles[index] = new ChestTile();
 				break;
 
             case TileTypeUnknown:

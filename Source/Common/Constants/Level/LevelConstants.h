@@ -15,6 +15,10 @@ enum TileType
 {
   TileTypeGround = 0,
   TileTypeWater = 1,
+  TileTypeTree = 2,
+  TileTypeWall = 3,
+  TileTypeTower = 4,
+  TileTypeChest = 5,
   TileTypeUnknown,
   TileTypeCount
 };

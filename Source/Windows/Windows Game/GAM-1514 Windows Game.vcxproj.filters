@@ -292,6 +292,18 @@
     <ClCompile Include="..\..\Common\Game\Tiles\WaterTile.cpp">
       <Filter>Source Files\Game\Tiles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\TreeTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\WallTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\TowerTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Tiles\ChestTile.cpp">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -505,6 +517,18 @@
       <Filter>Source Files\Constants\Resources</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Common\Game\Tiles\WaterTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\TreeTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\WallTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\TowerTile.h">
+      <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Tiles\ChestTile.h">
       <Filter>Source Files\Game\Tiles</Filter>
     </ClInclude>
   </ItemGroup>
