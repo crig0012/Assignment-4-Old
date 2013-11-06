@@ -148,6 +148,8 @@
     <ClCompile Include="..\..\Common\Libraries\zlib\trees.c" />
     <ClCompile Include="..\..\Common\Libraries\zlib\uncompr.c" />
     <ClCompile Include="..\..\Common\Libraries\zlib\zutil.c" />
+    <ClCompile Include="..\..\Common\Math\GDRandom.cpp" />
+    <ClCompile Include="..\..\Common\Math\GDRandomSearch.cpp" />
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\Menu.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLAnimatedTexture.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="..\..\Common\Libraries\zlib\zconf.h" />
     <ClInclude Include="..\..\Common\Libraries\zlib\zlib.h" />
     <ClInclude Include="..\..\Common\Libraries\zlib\zutil.h" />
+    <ClInclude Include="..\..\Common\Math\GDRandom.h" />
+    <ClInclude Include="..\..\Common\Math\GDRandomSearch.h" />
     <ClInclude Include="..\..\Common\Menus\MainMenu.h" />
     <ClInclude Include="..\..\Common\Menus\Menu.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGL.h" />

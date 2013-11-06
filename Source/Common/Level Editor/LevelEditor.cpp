@@ -31,6 +31,8 @@ m_TilesMenu(NULL),
 	m_TilesMenu->addButton(new UIToggle("MenuTileChest"));
 
 	m_OptionsMenu = new UISideMenu(this, SideMenuLeft);	//FOR CLEAR< DO A FOREACH(INDEX IN TILE AND SET IT ALL TO GROUND)
+	//m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));
+	//m_OptionsMenu->addButton(new UIToggle("MenuOptionLoad"));
 	m_OptionsMenu->addButton(new UIToggle("MenuOptionClear"));
 	m_OptionsMenu->addButton(new UIToggle("MenuOptionExit"));
 
@@ -187,6 +189,11 @@ void LevelEditor::keyUpEvent(int keyCode)
 			m_Level->keyUpEvent(keyCode);
 		}
 	}
+
+	if(keyCode == KEYCODE_C)
+	{
+		m_Level->randomizeLevel();
+	}
 }
 
 void LevelEditor::sideMenuButtonAction(UISideMenu* sideMenu, UIButton* button, int buttonIndex)
@@ -210,26 +217,18 @@ void LevelEditor::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, i
 
 		//Hide the options and tiles menus
 		m_TilesMenu->hide();
+		m_OptionsMenu->hide();
 	}
 
 	if(sideMenu == m_OptionsMenu)
 	{
-		//Un-toggled the previously selected toggle
-		//UIToggle* previousToggle = (UIToggle*)m_OptionsMenu->getButtonForIndex(m_SelectedTileIndex);
-		/*if(previousToggle != NULL)
-		{
-		previousToggle->setIsToggled(false);
-		}*/
-
 		//Set the selected tile index
 		m_SelectedTileIndex = toggle->isToggled() == true ? toggleIndex : -1;		
 
 		//Hide the options and tiles menus
 		if(m_SelectedTileIndex == 0)
 		{
-			//reset();
-			//m_Level;
-			//Level();
+			m_Level->load(NULL);
 		}
 
 		if(m_SelectedTileIndex == 1)
@@ -239,6 +238,8 @@ void LevelEditor::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, i
 		}
 
 		m_OptionsMenu->hide();
+		m_TilesMenu->hide();
 	}
 }
+
 

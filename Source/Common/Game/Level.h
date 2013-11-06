@@ -66,11 +66,13 @@ public:
     //Coveniance methods to toggle debug paint methods
     void togglePaintTileScoring();
     void togglePaintTileIndexes();
+	void randomizeLevel();
+	
     
 protected:
 	//Disables the old tiles selection (if ground tile) and
 	//enables the newly selected tiles selection (if ground tile)
-	void setSelectedTileIndex(int selectedIndex);
+	
     
 	//Protected Member variables
 	Player* m_Player;
@@ -82,6 +84,7 @@ protected:
 	int m_SelectedTileIndex;
     bool m_PaintTileScoring;
     bool m_PaintTileIndexes;
+	void setSelectedTileIndex(int selectedIndex);
 };
 
 #endif

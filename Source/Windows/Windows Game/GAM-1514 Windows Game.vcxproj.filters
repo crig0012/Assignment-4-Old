@@ -77,6 +77,9 @@
     <Filter Include="Source Files\Constants\Resources">
       <UniqueIdentifier>{7e79ef44-6581-4982-82cd-ac848cf3e989}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{8f58c1cb-de6d-47b0-a111-3202ca3aa0ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -304,6 +307,12 @@
     <ClCompile Include="..\..\Common\Game\Tiles\ChestTile.cpp">
       <Filter>Source Files\Game\Tiles</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Math\GDRandom.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Math\GDRandomSearch.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -530,6 +539,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Game\Tiles\ChestTile.h">
       <Filter>Source Files\Game\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Math\GDRandom.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Math\GDRandomSearch.h">
+      <Filter>Source Files\Math</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

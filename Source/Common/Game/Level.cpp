@@ -19,68 +19,80 @@
 #include "../Input/Input.h"
 #include "../Screen Manager/ScreenManager.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <fstream>
+#include "../Math/GDRandomSearch.h"
 
 
 Level::Level(bool isEditingLevel) :
-    m_HorizontalTiles(0),
-    m_VerticalTiles(0),
-    m_TileSize(EMPTY_LEVEL_TILE_SIZE),
-    m_PlayerStartingTileIndex(EMPTY_LEVEL_STARTING_PLAYER_TILE_INDEX),
-    m_Player(NULL),
-    m_Tiles(NULL),
-    m_SelectedTileIndex(-1),
-    m_PaintTileScoring(false),
-    m_PaintTileIndexes(false)
+m_HorizontalTiles(0),
+	m_VerticalTiles(0),
+	m_TileSize(EMPTY_LEVEL_TILE_SIZE),
+	m_PlayerStartingTileIndex(EMPTY_LEVEL_STARTING_PLAYER_TILE_INDEX),
+	m_Player(NULL),
+	m_Tiles(NULL),
+	m_SelectedTileIndex(-1),
+	m_PaintTileScoring(false),
+	m_PaintTileIndexes(false)
 {
-    //Create the player object
-    if(isEditingLevel == false)
-    {
-        m_Player = new Player(this);
-    }
-    
-    //Calculate the number of horizontal and vertical tiles
-    m_HorizontalTiles = ScreenManager::getInstance()->getScreenWidth() / m_TileSize;
-    m_VerticalTiles = ScreenManager::getInstance()->getScreenHeight() / m_TileSize;
-    
-    //Allocate the tiles array, the inheriting class will populate this array with Tile objects
+	//Create the player object
+	if(isEditingLevel == false)
+	{
+		m_Player = new Player(this);
+	}
+
+	//Calculate the number of horizontal and vertical tiles
+	m_HorizontalTiles = ScreenManager::getInstance()->getScreenWidth() / m_TileSize;
+	m_VerticalTiles = ScreenManager::getInstance()->getScreenHeight() / m_TileSize;
+
+	//Allocate the tiles array, the inheriting class will populate this array with Tile objects
 	m_Tiles = new Tile*[m_HorizontalTiles * m_VerticalTiles];
-    
-    //Initialize all the tiles to NULL
-    for(int i = 0; i < m_HorizontalTiles * m_VerticalTiles; i++)
-    {
-        m_Tiles[i] = NULL;
-    }
-    
-    //Load an empty level
-    load(NULL);
+
+	//Initialize all the tiles to NULL
+	for(int i = 0; i < m_HorizontalTiles * m_VerticalTiles; i++)
+	{
+		m_Tiles[i] = NULL;
+	}
+
+	//Load an empty level
+	load(NULL);
 }
 
 Level::~Level()
 {
-    //Delete the player object
+	//Delete the player object
 	if(m_Player != NULL)
 	{
 		delete m_Player;
 		m_Player = NULL;
 	}
-    
-    //Delete the tiles array, the inheriting class
-    //must delete the object in this array itself
+
+	//Delete the tiles array, the inheriting class
+	//must delete the object in this array itself
 	if(m_Tiles != NULL)
 	{
-        //Cycle through and delete all the tile objects in the array
-        for(int i = 0; i < getNumberOfTiles(); i++)
-        {
-            if(m_Tiles[i] != NULL)
-            {
-                delete m_Tiles[i];
-                m_Tiles[i] = NULL;
-            }
-        }
-        
+		//Cycle through and delete all the tile objects in the array
+		for(int i = 0; i < getNumberOfTiles(); i++)
+		{
+			if(m_Tiles[i] != NULL)
+			{
+				delete m_Tiles[i];
+				m_Tiles[i] = NULL;
+			}
+		}
+
 		delete[] m_Tiles;
 		m_Tiles = NULL;
+	}
+}
+
+void Level::randomizeLevel()
+{
+	GDRandom random;
+	random.randomizeSeed();
+	for( int i = 0; i < getNumberOfTiles(); i++)
+	{
+		setTileTypeAtIndex((TileType)random.random(6), i);
 	}
 }
 
@@ -94,7 +106,7 @@ void Level::update(double aDelta)
 			m_Tiles[i]->update(aDelta);
 		}
 	}
-    
+
 	//Update the Player
 	if(m_Player != NULL)
 	{
@@ -107,32 +119,32 @@ void Level::paint()
 	//Cycle through and paint all the tiles
 	for(int i = 0; i < getNumberOfTiles(); i++)
 	{
-        //Safety check the tile
+		//Safety check the tile
 		if(m_Tiles[i] != NULL)
 		{
-            //Paint the tile
-            m_Tiles[i]->paint();
-            
-            //If the paint tile indexes flag is set to true,
-            //draw the index number on the tiles
-            if(m_PaintTileIndexes == true)
-            {
-                m_Tiles[i]->paintIndex(i);
-            }
+			//Paint the tile
+			m_Tiles[i]->paint();
+
+			//If the paint tile indexes flag is set to true,
+			//draw the index number on the tiles
+			if(m_PaintTileIndexes == true)
+			{
+				m_Tiles[i]->paintIndex(i);
+			}
 		}
 	}
-    
+
 	//Paint the Player
 	if(m_Player != NULL)
 	{
-        //If paint tile scoring flag is set to true,
-        //draw the path scoring
-        if(m_PaintTileScoring == true)
-        {
-            //TODO: Paint the tile scores
-        }
-        
-        //Paint the player
+		//If paint tile scoring flag is set to true,
+		//draw the path scoring
+		if(m_PaintTileScoring == true)
+		{
+			//TODO: Paint the tile scores
+		}
+
+		//Paint the player
 		m_Player->paint();
 	}
 }
@@ -144,15 +156,16 @@ void Level::reset()
 	{
 		if(m_Tiles[i] != NULL)
 		{
+
 			m_Tiles[i]->reset();
 		}
 	}
-    
+
 	//Reset the Player
 	if(m_Player != NULL)
 	{
 		m_Player->reset();
-        m_Player->setCurrentTile(m_Tiles[m_PlayerStartingTileIndex]);
+		m_Player->setCurrentTile(m_Tiles[m_PlayerStartingTileIndex]);
 	}
 }
 
@@ -160,99 +173,155 @@ void Level::mouseLeftClickUpEvent(float aPositionX, float aPositionY)
 {
 	//Convert the mouse click position, into a tile index
 	int index = getTileIndexForPosition(aPositionX, aPositionY);
-    
+
 	//Safety check that the tile isn't NULL
 	if(m_Tiles[index] != NULL)
 	{
-        //Set the selected tile index
-        setSelectedTileIndex(index);
-        
-        //If the tile is walkable, set the player's destination tile
-        if(m_Tiles[index]->isWalkableTile() == true)
-        {
-            if(m_Player != NULL)
-            {
-                m_Player->setDestinationTile(m_Tiles[m_SelectedTileIndex]);
-            }
-        }
+		//Set the selected tile index
+		setSelectedTileIndex(index);
+
+		//If the tile is walkable, set the player's destination tile
+		if(m_Tiles[index]->isWalkableTile() == true)
+		{
+			if(m_Player != NULL)
+			{
+				m_Player->setDestinationTile(m_Tiles[m_SelectedTileIndex]);
+			}
+		}
 	}
 }
 
 void Level::keyUpEvent(int keyCode)
 {
-    if(keyCode == KEYCODE_R)
-    {
-        reset();
-    }
-    else if(keyCode == KEYCODE_S)
-    {
-        togglePaintTileScoring();
-    }
-    else if(keyCode == KEYCODE_I)
-    {
-        togglePaintTileIndexes();
-    }
+	if(keyCode == KEYCODE_R)
+	{
+		reset();
+	}
+	else if(keyCode == KEYCODE_S)
+	{
+		togglePaintTileScoring();
+	}
+	else if(keyCode == KEYCODE_I)
+	{
+		togglePaintTileIndexes();
+	}
 }
 
 void Level::load(const char* levelName)
 {
-    //If the level name isn't NULL load the level from the filesystem,
-    //if it is NULL load an empty level with just ground tiles
-    if(levelName != NULL)
-    {
-        //TODO: save the level
-    }
-    else
-    {
-        //Tile variables
-        int tileIndex = 0;
-        float tileX = 0.0f;
-        float tileY = 0.0f;
+	//If the level name isn't NULL load the level from the filesystem,
+	//if it is NULL load an empty level with just ground tiles
+	if(levelName != NULL)
+	{
+		std::ifstream inputStream;
+		inputStream.open(levelName, std::ifstream::in | std::ifstream::binary);
 
-        //Cycle through all the tiles and create them
-        for(int v = 0; v < getNumberOfVerticalTiles(); v++)
-        {
-            for(int h = 0; h < getNumberOfHorizontalTiles(); h++)
-            {
-                //The empty level will contain only ground tiles
-                m_Tiles[tileIndex] = new GroundTile();
-                m_Tiles[tileIndex]->setPosition(tileX, tileY);
-                m_Tiles[tileIndex]->setSize(m_TileSize, m_TileSize);
+		if(inputStream.is_open() == true)
+		{
+			inputStream.seekg(0, inputStream.end);
+			long long bufferSize = inputStream.tellg();
 
-                //Increment the tile index
-                tileIndex++;
+			inputStream.seekg(0, inputStream.beg);
 
-                //And increment the tile x position
-                tileX += m_TileSize;
-            }
+			char* buffer = new char[bufferSize];
+			inputStream.read(buffer, (int)bufferSize);
+			inputStream.close();
 
-            //Increment the tile y position and reset the tile x position, since we started a new row
-            tileY += m_TileSize;
-            tileX = 0.0f;
-        }
-    }
-    
-    //The level is loaded, reset everything
-    reset();
+			for(int i = 0; i < bufferSize; i++)
+			{
+				setTileTypeAtIndex((TileType)buffer[i], i);
+			}
+
+			delete [] buffer;
+			buffer = NULL;
+		}
+	}
+
+	else
+	{
+		//Tile variables
+		int tileIndex = 0;
+		float tileX = 0.0f;
+		float tileY = 0.0f;
+
+		//Cycle through all the tiles and create them
+		for(int v = 0; v < getNumberOfVerticalTiles(); v++)
+		{
+			for(int h = 0; h < getNumberOfHorizontalTiles(); h++)
+			{
+				//The empty level will contain only ground tiles
+				m_Tiles[tileIndex] = new GroundTile();
+				m_Tiles[tileIndex]->setPosition(tileX, tileY);
+				m_Tiles[tileIndex]->setSize(m_TileSize, m_TileSize);
+
+				//Increment the tile index
+				tileIndex++;
+
+				//And increment the tile x position
+				tileX += m_TileSize;
+			}
+
+			//Increment the tile y position and reset the tile x position, since we started a new row
+			tileY += m_TileSize;
+			tileX = 0.0f;
+		}
+	}
+
+	//The level is loaded, reset everything
+	reset();
 }
 
 void Level::save(const char* levelName)
 {
-    //TODO: save the level
+	if(levelName != NULL)
+	{
+		std::ofstream outputStream;
+		outputStream.open(levelName, std::ifstream::out | std::ifstream::binary);
+
+		if(outputStream.is_open() == true)
+		{
+			/*
+			outputStream.seekg(0, outputStream.beg);
+
+			outputStream.read(buffer, (int)bufferSize);
+			outputStream.close();
+			*/
+
+			long long bufferSize = getNumberOfTiles();
+			char* buffer = new char[bufferSize];
+
+			for(int i = 0; i < getNumberOfTiles(); i++)
+			{
+				buffer[i] = (char)getTileTypeForIndex(i);
+			}
+
+			for(int i = 0; i < getNumberOfTiles(); i++)
+			{
+				//outputStream.write(buffer[i],i);
+				outputStream.write(levelName, buffer[i]);
+				//outputStream << buffer[i];
+			}
+
+			outputStream.close();
+
+			//delete [] buffer;
+			//buffer = NULL;
+		}
+	}
 }
 
 TileType Level::getTileTypeForIndex(int index)
 {
-    if(index >= 0 && index < getNumberOfTiles())
-    {
-        return m_Tiles[index]->getTileType();
-    }
-    return TileTypeUnknown;
+	if(index >= 0 && index < getNumberOfTiles())
+	{
+		return m_Tiles[index]->getTileType();
+	}
+	return TileTypeUnknown;
 }
 
 unsigned int Level::getNumberOfTiles()
 {
-    return getNumberOfHorizontalTiles() * getNumberOfVerticalTiles();
+	return getNumberOfHorizontalTiles() * getNumberOfVerticalTiles();
 }
 
 unsigned int Level::getNumberOfHorizontalTiles()
@@ -267,11 +336,11 @@ unsigned int Level::getNumberOfVerticalTiles()
 
 bool Level::validateTileCoordinates(int aCoordinatesX, int aCoordinatesY)
 {
-    if(aCoordinatesX < 0 || aCoordinatesY < 0 || aCoordinatesX >= getNumberOfHorizontalTiles() || aCoordinatesY >= getNumberOfVerticalTiles())
+	if(aCoordinatesX < 0 || aCoordinatesY < 0 || aCoordinatesX >= getNumberOfHorizontalTiles() || aCoordinatesY >= getNumberOfVerticalTiles())
 	{
-        return false;
-    }
-    return true;
+		return false;
+	}
+	return true;
 }
 
 int Level::getTileCoordinateForPosition(int aPosition)
@@ -293,7 +362,7 @@ int Level::getTileIndexForCoordinates(int aCoordinatesX, int aCoordinatesY)
 	{
 		return aCoordinatesX + (aCoordinatesY * getNumberOfHorizontalTiles());
 	}
-    
+
 	return -1;
 }
 
@@ -314,93 +383,93 @@ Tile* Level::getTileForCoordinates(int aCoordinatesX, int aCoordinatesY)
 
 Tile* Level::getTileForIndex(int aIndex)
 {
-    //Safety check the index bounds
+	//Safety check the index bounds
 	if(aIndex >= 0 && aIndex < getNumberOfTiles())
 	{
 		return m_Tiles[aIndex];
 	}
-    
-    //If we got here, it means the index passed in was out of bounds
+
+	//If we got here, it means the index passed in was out of bounds
 	return NULL;
 }
 
 void Level::setTileTypeAtPosition(TileType tileType, int positionX, int positionY)
 {
-    setTileTypeAtIndex(tileType, getTileIndexForPosition(positionX, positionY));
+	setTileTypeAtIndex(tileType, getTileIndexForPosition(positionX, positionY));
 }
 
 void Level::setTileTypeAtCoordinates(TileType tileType, int coordinatesX, int coordinatesY)
 {
-    setTileTypeAtIndex(tileType, getTileIndexForCoordinates(coordinatesX, coordinatesY));
+	setTileTypeAtIndex(tileType, getTileIndexForCoordinates(coordinatesX, coordinatesY));
 }
 
 void Level::setTileTypeAtIndex(TileType tileType, int index)
 {
-    //Safety check the index
-    if(index >= 0 && index < getNumberOfTiles())
+	//Safety check the index
+	if(index >= 0 && index < getNumberOfTiles())
 	{
-        //Don't replace the tile if its the same type of tile that already exists
-        if(m_Tiles[index]->getTileType() == tileType)
-        {
-            return;
-        }
-    
-        //Delete the tile at the index, if one exists
-        if(m_Tiles[index] != NULL)
-        {
+		//Don't replace the tile if its the same type of tile that already exists
+		if(m_Tiles[index]->getTileType() == tileType)
+		{
+			return;
+		}
+
+		//Delete the tile at the index, if one exists
+		if(m_Tiles[index] != NULL)
+		{
 			delete m_Tiles[index];
 			m_Tiles[index] = NULL;
 		}
-        
-        //Create the new tile based on the TileType
-        switch (tileType)
-        {
-            case TileTypeGround:
-                m_Tiles[index] = new GroundTile();
-                break;
 
-			case TileTypeWater:
-				m_Tiles[index] = new WaterTile();
-				break;
+		//Create the new tile based on the TileType
+		switch (tileType)
+		{
+		case TileTypeGround:
+			m_Tiles[index] = new GroundTile();
+			break;
 
-			case TileTypeTree:
-				m_Tiles[index] = new TreeTile();
-				break;
+		case TileTypeWater:
+			m_Tiles[index] = new WaterTile();
+			break;
 
-			case TileTypeWall:
-				m_Tiles[index] = new WallTile();
-				break;
+		case TileTypeTree:
+			m_Tiles[index] = new TreeTile();
+			break;
 
-			case TileTypeTower:
-				m_Tiles[index] = new TowerTile();
-				break;
+		case TileTypeWall:
+			m_Tiles[index] = new WallTile();
+			break;
 
-			case TileTypeChest:
-				m_Tiles[index] = new ChestTile();
-				break;
+		case TileTypeTower:
+			m_Tiles[index] = new TowerTile();
+			break;
 
-            case TileTypeUnknown:
-            default:
-                m_Tiles[index] = NULL;
-                break;
-        }
-        
-        //Calculate the coordinates and set the tile position and size
-        int coordinateX = (index % getNumberOfHorizontalTiles());
-        int coordinateY = ((index - coordinateX) / getNumberOfHorizontalTiles());
-        m_Tiles[index]->setPosition(coordinateX  * m_TileSize, coordinateY * m_TileSize);
-        m_Tiles[index]->setSize(m_TileSize, m_TileSize);
+		case TileTypeChest:
+			m_Tiles[index] = new ChestTile();
+			break;
+
+		case TileTypeUnknown:
+		default:
+			m_Tiles[index] = NULL;
+			break;
+		}
+
+		//Calculate the coordinates and set the tile position and size
+		int coordinateX = (index % getNumberOfHorizontalTiles());
+		int coordinateY = ((index - coordinateX) / getNumberOfHorizontalTiles());
+		m_Tiles[index]->setPosition(coordinateX  * m_TileSize, coordinateY * m_TileSize);
+		m_Tiles[index]->setSize(m_TileSize, m_TileSize);
 	}
 }
 
 void Level::togglePaintTileScoring()
 {
-    m_PaintTileScoring = !m_PaintTileScoring;
+	m_PaintTileScoring = !m_PaintTileScoring;
 }
 
 void Level::togglePaintTileIndexes()
 {
-    m_PaintTileIndexes = !m_PaintTileIndexes;
+	m_PaintTileIndexes = !m_PaintTileIndexes;
 }
 
 void Level::setSelectedTileIndex(int aSelectedIndex)
@@ -410,10 +479,10 @@ void Level::setSelectedTileIndex(int aSelectedIndex)
 	{
 		m_Tiles[m_SelectedTileIndex]->setIsSelected(false);
 	}
-    
+
 	//Set the new tile index
 	m_SelectedTileIndex = aSelectedIndex;
-    
+
 	//Selected the newly selected tile
 	if(m_SelectedTileIndex >= 0 && m_SelectedTileIndex < getNumberOfTiles())
 	{
