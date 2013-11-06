@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Algonquin College. All rights reserved.
 //
 
-#ifndef CHEST_TILE_H
-#define CHEST_TILE_H
+#ifndef EXIT_OPTIONS_H
+#define EXIT_OPTIONS_H
 
 #include "Tile.h"
 
 
-class ChestTile : public Tile
+class ExitOptions : public Tile
 {
 public:
-	ChestTile(const char* textureName = RES_TILE_CHEST);
-	virtual ~ChestTile();
+	ExitOptions(const char* textureName);
+	virtual ~ExitOptions();
   
     //Return the type of the tile
     const char* getType();

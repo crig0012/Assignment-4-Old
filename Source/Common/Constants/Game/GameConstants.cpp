@@ -13,6 +13,9 @@ const char* TILE_WATER_TYPE = "WaterTile";
 const char* TILE_TOWER_TYPE = "TowerTile";
 const int TILE_PADDING = 2;
 
+//Menu Constants
+//const char*
+
 //Player Constants
 const char* PLAYER_TYPE = "Player";
 const int PLAYER_SIZE = 24;

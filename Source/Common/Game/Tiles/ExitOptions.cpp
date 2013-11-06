@@ -6,22 +6,22 @@
 //  Copyright (c) 2013 Algonquin College. All rights reserved.
 //
 
-#include "ChestTile.h"
+#include "ExitOptions.h"
 #include "../../OpenGL/OpenGL.h"
 #include "../../Constants/Constants.h"
 
 
-ChestTile::ChestTile(const char* textureName) : Tile(TileTypeChest, textureName, true)
+ExitOptions::ExitOptions(const char* textureName) : Tile(TileTypeChest, textureName, true)
 {
 	
 }
 
-ChestTile::~ChestTile()
+ExitOptions::~ExitOptions()
 {
 
 }
 
-const char* ChestTile::getType()
+const char* ExitOptions::getType()
 {
-    return TILE_CHEST_TYPE;
+    return 0;
 }

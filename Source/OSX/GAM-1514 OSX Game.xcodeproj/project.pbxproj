@@ -86,6 +86,15 @@
 		69BB4163169B657A00B970A9 /* InputConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69BB4161169B657900B970A9 /* InputConstants.cpp */; };
 		69CB42FF17D7A8AD0005FEA6 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 69CB42FE17D7A8AD0005FEA6 /* Resources */; };
 		69CB430217D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69CB430017D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp */; };
+		B0822EAA182AB37300201C5E /* ChestTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822E9C182AB37300201C5E /* ChestTile.cpp */; };
+		B0822EAB182AB37300201C5E /* ClearOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822E9E182AB37300201C5E /* ClearOptions.cpp */; };
+		B0822EAC182AB37300201C5E /* ExitOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA0182AB37300201C5E /* ExitOptions.cpp */; };
+		B0822EAD182AB37300201C5E /* TowerTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA2182AB37300201C5E /* TowerTile.cpp */; };
+		B0822EAE182AB37300201C5E /* TreeTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA4182AB37300201C5E /* TreeTile.cpp */; };
+		B0822EAF182AB37300201C5E /* WallTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA6182AB37300201C5E /* WallTile.cpp */; };
+		B0822EB0182AB37300201C5E /* WaterTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA8182AB37300201C5E /* WaterTile.cpp */; };
+		B0822EB6182AB66900201C5E /* GDRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EB2182AB66900201C5E /* GDRandom.cpp */; };
+		B0822EB7182AB66900201C5E /* GDRandomSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,6 +255,24 @@
 		69CB42FE17D7A8AD0005FEA6 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../../Resources; sourceTree = "<group>"; };
 		69CB430017D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLAnimatedTexture.cpp; sourceTree = "<group>"; };
 		69CB430117D7A8C30005FEA6 /* OpenGLAnimatedTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLAnimatedTexture.h; sourceTree = "<group>"; };
+		B0822E9C182AB37300201C5E /* ChestTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChestTile.cpp; sourceTree = "<group>"; };
+		B0822E9D182AB37300201C5E /* ChestTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChestTile.h; sourceTree = "<group>"; };
+		B0822E9E182AB37300201C5E /* ClearOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClearOptions.cpp; sourceTree = "<group>"; };
+		B0822E9F182AB37300201C5E /* ClearOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearOptions.h; sourceTree = "<group>"; };
+		B0822EA0182AB37300201C5E /* ExitOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitOptions.cpp; sourceTree = "<group>"; };
+		B0822EA1182AB37300201C5E /* ExitOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExitOptions.h; sourceTree = "<group>"; };
+		B0822EA2182AB37300201C5E /* TowerTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TowerTile.cpp; sourceTree = "<group>"; };
+		B0822EA3182AB37300201C5E /* TowerTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TowerTile.h; sourceTree = "<group>"; };
+		B0822EA4182AB37300201C5E /* TreeTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TreeTile.cpp; sourceTree = "<group>"; };
+		B0822EA5182AB37300201C5E /* TreeTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TreeTile.h; sourceTree = "<group>"; };
+		B0822EA6182AB37300201C5E /* WallTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WallTile.cpp; sourceTree = "<group>"; };
+		B0822EA7182AB37300201C5E /* WallTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallTile.h; sourceTree = "<group>"; };
+		B0822EA8182AB37300201C5E /* WaterTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaterTile.cpp; sourceTree = "<group>"; };
+		B0822EA9182AB37300201C5E /* WaterTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaterTile.h; sourceTree = "<group>"; };
+		B0822EB2182AB66900201C5E /* GDRandom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GDRandom.cpp; sourceTree = "<group>"; };
+		B0822EB3182AB66900201C5E /* GDRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDRandom.h; sourceTree = "<group>"; };
+		B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GDRandomSearch.cpp; sourceTree = "<group>"; };
+		B0822EB5182AB66900201C5E /* GDRandomSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDRandomSearch.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,6 +334,7 @@
 		6927EC541684D3A800FE2F5C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				B0822EB1182AB66900201C5E /* Math */,
 				69BB415D1699C25500B970A9 /* App */,
 				69BB40881699BAA500B970A9 /* Constants */,
 				69BB408E1699BAA500B970A9 /* Game */,
@@ -368,6 +396,20 @@
 		6944960A181ABCFA00E030C8 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				B0822E9C182AB37300201C5E /* ChestTile.cpp */,
+				B0822E9D182AB37300201C5E /* ChestTile.h */,
+				B0822E9E182AB37300201C5E /* ClearOptions.cpp */,
+				B0822E9F182AB37300201C5E /* ClearOptions.h */,
+				B0822EA0182AB37300201C5E /* ExitOptions.cpp */,
+				B0822EA1182AB37300201C5E /* ExitOptions.h */,
+				B0822EA2182AB37300201C5E /* TowerTile.cpp */,
+				B0822EA3182AB37300201C5E /* TowerTile.h */,
+				B0822EA4182AB37300201C5E /* TreeTile.cpp */,
+				B0822EA5182AB37300201C5E /* TreeTile.h */,
+				B0822EA6182AB37300201C5E /* WallTile.cpp */,
+				B0822EA7182AB37300201C5E /* WallTile.h */,
+				B0822EA8182AB37300201C5E /* WaterTile.cpp */,
+				B0822EA9182AB37300201C5E /* WaterTile.h */,
 				6944960B181ABCFA00E030C8 /* GroundTile.cpp */,
 				6944960C181ABCFA00E030C8 /* GroundTile.h */,
 				6944960D181ABCFA00E030C8 /* Tile.cpp */,
@@ -652,6 +694,18 @@
 			name = App;
 			sourceTree = "<group>";
 		};
+		B0822EB1182AB66900201C5E /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				B0822EB2182AB66900201C5E /* GDRandom.cpp */,
+				B0822EB3182AB66900201C5E /* GDRandom.h */,
+				B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */,
+				B0822EB5182AB66900201C5E /* GDRandomSearch.h */,
+			);
+			name = Math;
+			path = ../../Common/Math;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -788,6 +842,15 @@
 				6944962E181AD5A300E030C8 /* UIToggle.cpp in Sources */,
 				69177286181CB8AE0019F70B /* OpenGLTextureCache.cpp in Sources */,
 				6917728C181DA4920019F70B /* Level.cpp in Sources */,
+				B0822EAA182AB37300201C5E /* ChestTile.cpp in Sources */,
+				B0822EAB182AB37300201C5E /* ClearOptions.cpp in Sources */,
+				B0822EAC182AB37300201C5E /* ExitOptions.cpp in Sources */,
+				B0822EAD182AB37300201C5E /* TowerTile.cpp in Sources */,
+				B0822EAE182AB37300201C5E /* TreeTile.cpp in Sources */,
+				B0822EAF182AB37300201C5E /* WallTile.cpp in Sources */,
+				B0822EB0182AB37300201C5E /* WaterTile.cpp in Sources */,
+				B0822EB6182AB66900201C5E /* GDRandom.cpp in Sources */,
+				B0822EB7182AB66900201C5E /* GDRandomSearch.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

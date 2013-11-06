@@ -6,22 +6,22 @@
 //  Copyright (c) 2013 Algonquin College. All rights reserved.
 //
 
-#include "GroundTile.h"
+#include "ClearOptions.h"
 #include "../../OpenGL/OpenGL.h"
 #include "../../Constants/Constants.h"
 
 
-GroundTile::GroundTile(const char* textureName) : Tile(TileTypeGround, textureName, true)
+ClearOptions::ClearOptions(const char* textureName) : Tile(TileTypeGround, textureName, true)
 {
 
 }
 
-GroundTile::~GroundTile()
+ClearOptions::~ClearOptions()
 {
 
 }
 
-const char* GroundTile::getType()
+const char* ClearOptions::getType()
 {
-    return TILE_GROUND_TYPE;
+    return 0;
 }
