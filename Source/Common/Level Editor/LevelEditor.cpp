@@ -193,6 +193,11 @@ void LevelEditor::keyUpEvent(int keyCode)
 	{
 		m_Level->randomizeLevel();
 	}
+
+	if(keyCode == KEYCODE_S)
+	{
+		ScreenManager::getInstance()->switchScreen(SAVE_LOAD_SCREEN_NAME);
+	}
 }
 
 void LevelEditor::sideMenuButtonAction(UISideMenu* sideMenu, UIButton* button, int buttonIndex)

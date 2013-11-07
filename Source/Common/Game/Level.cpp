@@ -92,7 +92,7 @@ void Level::randomizeLevel()
 	random.randomizeSeed();
 	for( int i = 0; i < getNumberOfTiles(); i++)
 	{
-		setTileTypeAtIndex((TileType)random.random(6), i);
+		setTileTypeAtIndex((TileType)random.random(TileTypeCount), i);
 	}
 }
 
@@ -273,41 +273,25 @@ void Level::load(const char* levelName)
 
 void Level::save(const char* levelName)
 {
-	if(levelName != NULL)
+	long long bufferSize = getNumberOfTiles();
+	char* buffer = new char[bufferSize];
+
+	for(int i = 0; i < bufferSize; i++)
 	{
-		std::ofstream outputStream;
-		outputStream.open(levelName, std::ifstream::out | std::ifstream::binary);
-
-		if(outputStream.is_open() == true)
-		{
-			/*
-			outputStream.seekg(0, outputStream.beg);
-
-			outputStream.read(buffer, (int)bufferSize);
-			outputStream.close();
-			*/
-
-			long long bufferSize = getNumberOfTiles();
-			char* buffer = new char[bufferSize];
-
-			for(int i = 0; i < getNumberOfTiles(); i++)
-			{
-				buffer[i] = (char)getTileTypeForIndex(i);
-			}
-
-			for(int i = 0; i < getNumberOfTiles(); i++)
-			{
-				//outputStream.write(buffer[i],i);
-				outputStream.write(levelName, buffer[i]);
-				//outputStream << buffer[i];
-			}
-
-			outputStream.close();
-
-			//delete [] buffer;
-			//buffer = NULL;
-		}
+		buffer[i] = (char)getTileTypeForIndex(i);
 	}
+
+	std::ofstream outputStream;
+	outputStream.open(levelName, std::ofstream::out | std::ofstream::binary);
+
+	if(outputStream.is_open() == true)
+	{
+		outputStream.write(buffer, bufferSize);
+		outputStream.close();
+	}
+
+	delete [] buffer;
+	buffer = NULL;
 }
 
 TileType Level::getTileTypeForIndex(int index)

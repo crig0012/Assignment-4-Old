@@ -313,6 +313,9 @@
     <ClCompile Include="..\..\Common\Math\GDRandomSearch.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\SaveLoad.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -545,6 +548,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Math\GDRandomSearch.h">
       <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\SaveLoad.h">
+      <Filter>Source Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
