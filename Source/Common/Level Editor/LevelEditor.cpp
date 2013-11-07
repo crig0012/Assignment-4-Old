@@ -31,8 +31,8 @@ m_TilesMenu(NULL),
 	m_TilesMenu->addButton(new UIToggle("MenuTileChest"));
 
 	m_OptionsMenu = new UISideMenu(this, SideMenuLeft);	//FOR CLEAR< DO A FOREACH(INDEX IN TILE AND SET IT ALL TO GROUND)
-	//m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));
-	//m_OptionsMenu->addButton(new UIToggle("MenuOptionLoad"));
+	m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));
+	m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));	//WTF WHY DOESNT LOAD WORK
 	m_OptionsMenu->addButton(new UIToggle("MenuOptionClear"));
 	m_OptionsMenu->addButton(new UIToggle("MenuOptionExit"));
 
@@ -163,7 +163,6 @@ void LevelEditor::mouseLeftClickUpEvent(float positionX, float positionY)
 	if(m_OptionsMenu != NULL)
 	{
 		m_OptionsMenu->mouseLeftClickUpEvent(positionX, positionY);
-		m_OptionsMenu->mouseLeftClickUpEvent(positionX, positionY);
 	}
 }
 
@@ -226,16 +225,18 @@ void LevelEditor::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, i
 		m_SelectedTileIndex = toggle->isToggled() == true ? toggleIndex : -1;		
 
 		//Hide the options and tiles menus
-		if(m_SelectedTileIndex == 0)
+		if(m_SelectedTileIndex == 3)
 		{
+			m_SelectedTileIndex;
 			m_Level->load(NULL);
 		}
 
-		if(m_SelectedTileIndex == 1)
+		if(m_SelectedTileIndex == 4)
 		{
-
 			ScreenManager::getInstance()->switchScreen(MAIN_MENU_SCREEN_NAME);
 		}
+
+		toggle->setIsToggled(false);
 
 		m_OptionsMenu->hide();
 		m_TilesMenu->hide();
