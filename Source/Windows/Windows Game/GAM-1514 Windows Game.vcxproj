@@ -152,7 +152,6 @@
     <ClCompile Include="..\..\Common\Math\GDRandomSearch.cpp" />
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\Menu.cpp" />
-    <ClCompile Include="..\..\Common\Menus\SaveLoad.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLAnimatedTexture.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTexture.cpp" />
@@ -228,7 +227,6 @@
     <ClInclude Include="..\..\Common\Math\GDRandomSearch.h" />
     <ClInclude Include="..\..\Common\Menus\MainMenu.h" />
     <ClInclude Include="..\..\Common\Menus\Menu.h" />
-    <ClInclude Include="..\..\Common\Menus\SaveLoad.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGL.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLAnimatedTexture.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLBuffer.h" />

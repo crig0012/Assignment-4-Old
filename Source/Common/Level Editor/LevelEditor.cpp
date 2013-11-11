@@ -19,7 +19,9 @@ m_TilesMenu(NULL),
 	m_OptionsMenu(NULL),
 	m_Level(NULL),
 	m_IsMouseDown(false),
-	m_SelectedTileIndex(-1)
+	m_SelectedTileIndex(-1),
+	m_SaveMenu(NULL),
+	m_LoadMenu(NULL)
 {
 	//Create the Tiles menu items
 	m_TilesMenu = new UISideMenu(this, SideMenuRight);
@@ -30,11 +32,29 @@ m_TilesMenu(NULL),
 	m_TilesMenu->addButton(new UIToggle("MenuTileTower"));
 	m_TilesMenu->addButton(new UIToggle("MenuTileChest"));
 
-	m_OptionsMenu = new UISideMenu(this, SideMenuLeft);	//FOR CLEAR< DO A FOREACH(INDEX IN TILE AND SET IT ALL TO GROUND)
-	m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));
-	m_OptionsMenu->addButton(new UIToggle("MenuOptionSave"));	//WTF WHY DOESNT LOAD WORK
-	m_OptionsMenu->addButton(new UIToggle("MenuOptionClear"));
-	m_OptionsMenu->addButton(new UIToggle("MenuOptionExit"));
+	m_OptionsMenu = new UISideMenu(this, SideMenuLeft);
+	m_OptionsMenu->addButton(new UIButton("MenuOptionSave"));
+	m_OptionsMenu->addButton(new UIButton("MenuOptionLoadV2"));
+	m_OptionsMenu->addButton(new UIButton("MenuOptionClear"));
+	m_OptionsMenu->addButton(new UIButton("MenuOptionExit"));
+
+	m_SaveMenu = new UISideMenu(this, SideMenuRight);
+	m_SaveMenu->addButton(new UIButton("Slot1"));
+	m_SaveMenu->addButton(new UIButton("SaveSlots"));
+	m_SaveMenu->addButton(new UIButton("Slot3"));
+	m_SaveMenu->addButton(new UIButton("Slot4"));
+	m_SaveMenu->addButton(new UIButton("Slot5"));
+	m_SaveMenu->addButton(new UIButton("Slot6"));
+	m_SaveMenu->addButton(new UIButton("Back"));
+
+	m_LoadMenu = new UISideMenu(this, SideMenuLeft);
+	m_LoadMenu->addButton(new UIButton("Slot1"));	
+	m_LoadMenu->addButton(new UIButton("SaveSlots"));
+	m_LoadMenu->addButton(new UIButton("Slot3"));
+	m_LoadMenu->addButton(new UIButton("Slot4"));
+	m_LoadMenu->addButton(new UIButton("Slot5"));
+	m_LoadMenu->addButton(new UIButton("Slot6"));
+	m_LoadMenu->addButton(new UIButton("Back"));
 
 	//Create the level object
 	m_Level = new Level(true);
@@ -57,10 +77,22 @@ LevelEditor::~LevelEditor()
 		m_TilesMenu = NULL;
 	}
 
+	if(m_SaveMenu != NULL)
+	{
+		delete m_SaveMenu;
+		m_SaveMenu = NULL;
+	}
+
 	if(m_OptionsMenu != NULL)
 	{
 		delete m_OptionsMenu;
 		m_OptionsMenu = NULL;
+	}
+
+	if(m_LoadMenu != NULL)
+	{
+		delete m_LoadMenu;
+		m_LoadMenu = NULL;
 	}
 }
 
@@ -85,6 +117,16 @@ void LevelEditor::update(double delta)
 	{
 		m_OptionsMenu->update(delta);
 	}
+
+	if(m_SaveMenu != NULL)
+	{
+		m_SaveMenu->update(delta);
+	}
+
+	if(m_LoadMenu != NULL)
+	{
+		m_LoadMenu->update(delta);
+	}
 }
 
 void LevelEditor::paint()
@@ -102,6 +144,16 @@ void LevelEditor::paint()
 	if(m_OptionsMenu != NULL)
 	{
 		m_OptionsMenu->paint();
+	}
+
+	if(m_SaveMenu != NULL)
+	{
+		m_SaveMenu->paint();
+	}
+
+	if(m_LoadMenu != NULL)
+	{
+		m_LoadMenu->paint();
 	}
 }
 
@@ -125,9 +177,24 @@ void LevelEditor::mouseMovementEvent(float deltaX, float deltaY, float positionX
 		m_OptionsMenu->mouseMovementEvent(deltaX, deltaY, positionX, positionY);
 	}
 
+	if(m_SaveMenu != NULL)
+	{
+		m_SaveMenu->mouseMovementEvent(deltaX, deltaY, positionX, positionY);
+	}
+
+	if(m_LoadMenu != NULL)
+	{
+		m_LoadMenu->mouseMovementEvent(deltaX, deltaY, positionX, positionY);
+	}
+
 	if(m_Level != NULL)
 	{        
-		if(m_SelectedTileIndex != -1 && m_IsMouseDown == true && m_TilesMenu->isShowing() == false && m_OptionsMenu->isShowing() == false)
+		if(m_SelectedTileIndex != -1 && 
+			m_IsMouseDown == true && 
+			m_TilesMenu->isShowing() == false && 
+			m_OptionsMenu->isShowing() == false && 
+			m_SaveMenu->isShowing() == false && 
+			m_LoadMenu->isShowing() == false)
 		{
 			m_Level->setTileTypeAtPosition((TileType)m_SelectedTileIndex, positionX, positionY);
 		}
@@ -148,7 +215,11 @@ void LevelEditor::mouseLeftClickUpEvent(float positionX, float positionY)
 	//Safety check the level pointer, then set the new tile type in the index
 	if(m_Level != NULL)
 	{
-		if(m_SelectedTileIndex != -1 && m_TilesMenu->isShowing() == false && m_OptionsMenu->isShowing() == false)
+		if(m_SelectedTileIndex != -1 && 
+			m_TilesMenu->isShowing() == false && 
+			m_OptionsMenu->isShowing() == false && 
+			m_SaveMenu->isShowing() == false && 
+			m_LoadMenu->isShowing() == false)
 		{
 			m_Level->setTileTypeAtPosition((TileType)m_SelectedTileIndex, positionX, positionY);
 		}
@@ -164,6 +235,16 @@ void LevelEditor::mouseLeftClickUpEvent(float positionX, float positionY)
 	{
 		m_OptionsMenu->mouseLeftClickUpEvent(positionX, positionY);
 	}
+
+	if(m_SaveMenu != NULL)
+	{
+		m_SaveMenu->mouseLeftClickUpEvent(positionX, positionY);
+	}
+
+	if(m_LoadMenu != NULL)
+	{
+		m_LoadMenu->mouseLeftClickUpEvent(positionX, positionY);
+	}
 }
 
 void LevelEditor::keyUpEvent(int keyCode)
@@ -172,12 +253,18 @@ void LevelEditor::keyUpEvent(int keyCode)
 	{
 		if(m_TilesMenu != NULL)
 		{
+			if(m_SaveMenu->isShowing() == true)
+				m_SaveMenu->hide();
+
 			m_TilesMenu->isShowing() == true ? m_TilesMenu->hide() : m_TilesMenu->show();
 		}
 	}
 
 	else if(keyCode == KEYCODE_ESCAPE)
 	{
+		if(m_LoadMenu->isShowing() == true)
+			m_LoadMenu->hide();
+
 		m_OptionsMenu->isShowing() == true ? m_OptionsMenu->hide() : m_OptionsMenu->show();
 	}
 
@@ -196,13 +283,140 @@ void LevelEditor::keyUpEvent(int keyCode)
 
 	if(keyCode == KEYCODE_S)
 	{
-		ScreenManager::getInstance()->switchScreen(SAVE_LOAD_SCREEN_NAME);
+		if(m_TilesMenu->isShowing() == true)
+			m_TilesMenu->hide();
+
+		m_SaveMenu->isShowing() == true ? m_SaveMenu->hide() : m_SaveMenu->show();
+	}
+
+	if(keyCode == KEYCODE_L)
+	{
+		if(m_OptionsMenu->isShowing() == true)
+			m_OptionsMenu->hide();
+
+		m_LoadMenu->isShowing() == true ? m_LoadMenu->hide() : m_LoadMenu->show();
 	}
 }
 
 void LevelEditor::sideMenuButtonAction(UISideMenu* sideMenu, UIButton* button, int buttonIndex)
 {
+	if(sideMenu == m_SaveMenu)
+	{
+		if(buttonIndex == 0)
+		{
+			m_Level->save("Slot1.bin");
+		}
 
+		if(buttonIndex == 1)
+		{
+			m_Level->save("Slot2.bin");
+		}
+
+		if(buttonIndex == 2)
+		{
+			m_Level->save("Slot3.bin");
+		}
+
+		if(buttonIndex == 3)
+		{
+			m_Level->save("Slot4.bin");
+		}
+
+		if(buttonIndex == 4)
+		{
+			m_Level->save("Slot5.bin");
+		}
+
+		if(buttonIndex == 5)
+		{
+			m_Level->save("Slot6.bin");
+		}
+
+		if(buttonIndex == 6)
+		{
+			m_SaveMenu->hide();
+		}
+
+		m_LoadMenu->hide();
+		m_SaveMenu->hide();
+		m_OptionsMenu->hide();
+	}
+
+	if(sideMenu == m_LoadMenu)
+	{
+		if(buttonIndex == 0)
+		{
+			m_Level->load("Slot1.bin");
+		}
+
+		if(buttonIndex == 1)
+		{
+			m_Level->load("Slot2.bin");
+		}
+
+		if(buttonIndex == 2)
+		{
+			m_Level->load("Slot3.bin");
+		}
+
+		if(buttonIndex == 3)
+		{
+			m_Level->load("Slot4.bin");
+		}
+
+		if(buttonIndex == 4)
+		{
+			m_Level->load("Slot5.bin");
+		}
+
+		if(buttonIndex == 5)
+		{
+			m_Level->load("Slot6.bin");
+		}
+
+		if(buttonIndex == 6)
+		{
+			m_LoadMenu->hide();
+		}
+
+		m_LoadMenu->hide();
+		m_SaveMenu->hide();
+		m_TilesMenu->hide();
+	}
+
+	if(sideMenu == m_OptionsMenu)
+	{
+		if(buttonIndex == 0)
+		{
+			keyUpEvent(KEYCODE_S);
+			//m_SaveMenu->show();
+			//m_OptionsMenu->hide();
+		}
+
+		if(buttonIndex == 1)
+		{
+			keyUpEvent(KEYCODE_L);
+			//m_LoadMenu->show();
+			//m_OptionsMenu->hide();
+		}
+
+		if(buttonIndex == 2)
+		{
+			m_Level->load(NULL);
+		}
+
+		if(buttonIndex == 3)
+		{
+			ScreenManager::getInstance()->switchScreen(MAIN_MENU_SCREEN_NAME);
+		}
+
+		if(buttonIndex != 1)
+		{
+			m_LoadMenu->hide();
+			m_OptionsMenu->hide();
+			m_TilesMenu->hide();
+		}
+	}
 }
 
 void LevelEditor::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, int toggleIndex)
@@ -220,31 +434,9 @@ void LevelEditor::sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, i
 		m_SelectedTileIndex = toggle->isToggled() == true ? toggleIndex : -1;
 
 		//Hide the options and tiles menus
+		m_LoadMenu->hide();
 		m_TilesMenu->hide();
 		m_OptionsMenu->hide();
-	}
-
-	if(sideMenu == m_OptionsMenu)
-	{
-		//Set the selected tile index
-		m_SelectedTileIndex = toggle->isToggled() == true ? toggleIndex : -1;		
-
-		//Hide the options and tiles menus
-		if(m_SelectedTileIndex == 3)
-		{
-			m_SelectedTileIndex;
-			m_Level->load(NULL);
-		}
-
-		if(m_SelectedTileIndex == 4)
-		{
-			ScreenManager::getInstance()->switchScreen(MAIN_MENU_SCREEN_NAME);
-		}
-
-		toggle->setIsToggled(false);
-
-		m_OptionsMenu->hide();
-		m_TilesMenu->hide();
 	}
 }
 

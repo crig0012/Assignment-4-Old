@@ -14,6 +14,7 @@
 
 class UISideMenu;
 class Level;
+class Save;
 
 class LevelEditor : public Screen, public UISideMenuListener
 {
@@ -31,13 +32,15 @@ public:
     void mouseLeftClickDownEvent(float positionX, float positionY);
     void mouseLeftClickUpEvent(float positionX, float positionY);
     void keyUpEvent(int keyCode);
-    
+
 private:
     void sideMenuButtonAction(UISideMenu* sideMenu, UIButton* button, int buttonIndex);
     void sideMenuToggleAction(UISideMenu* sideMenu, UIToggle* toggle, int toggleIndex);
     
     UISideMenu* m_TilesMenu;
 	UISideMenu* m_OptionsMenu;
+	UISideMenu* m_SaveMenu;
+	UISideMenu* m_LoadMenu;
     Level* m_Level;
     
     bool m_IsMouseDown;

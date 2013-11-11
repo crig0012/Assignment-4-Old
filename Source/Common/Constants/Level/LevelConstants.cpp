@@ -10,7 +10,8 @@
 
 //Level editor screen name
 const char* LEVEL_EDITOR_SCREEN_NAME = "LevelEditor";
-const char* SAVE_LOAD_SCREEN_NAME = "SaveLoad";
+const char* SAVE_SCREEN_NAME = "Save";
+const char* LOAD_SCREEN_NAME = "Load";
 
 //Empty Level Constants
 const int EMPTY_LEVEL_TILE_SIZE = 32;
