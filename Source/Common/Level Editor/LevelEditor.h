@@ -11,6 +11,7 @@
 
 #include "../Screen Manager/Screen.h"
 #include "../UI/UISideMenu.h"
+#include "../UI/UIFont.h"
 
 class UISideMenu;
 class Level;
@@ -45,6 +46,7 @@ private:
     
     bool m_IsMouseDown;
     int m_SelectedTileIndex;
+    UIFont* m_Font;
 };
 
 #endif /* defined(__GAM_1514_OSX_Game__LevelEditor__) */

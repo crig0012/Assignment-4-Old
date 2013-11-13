@@ -86,6 +86,7 @@
 		69BB4163169B657A00B970A9 /* InputConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69BB4161169B657900B970A9 /* InputConstants.cpp */; };
 		69CB42FF17D7A8AD0005FEA6 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 69CB42FE17D7A8AD0005FEA6 /* Resources */; };
 		69CB430217D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69CB430017D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp */; };
+		B02E2B461833DE980057D12D /* UIFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B02E2B441833DE980057D12D /* UIFont.cpp */; };
 		B0822EAA182AB37300201C5E /* ChestTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822E9C182AB37300201C5E /* ChestTile.cpp */; };
 		B0822EAB182AB37300201C5E /* ClearOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822E9E182AB37300201C5E /* ClearOptions.cpp */; };
 		B0822EAC182AB37300201C5E /* ExitOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA0182AB37300201C5E /* ExitOptions.cpp */; };
@@ -255,6 +256,8 @@
 		69CB42FE17D7A8AD0005FEA6 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Resources; path = ../../Resources; sourceTree = "<group>"; };
 		69CB430017D7A8C30005FEA6 /* OpenGLAnimatedTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLAnimatedTexture.cpp; sourceTree = "<group>"; };
 		69CB430117D7A8C30005FEA6 /* OpenGLAnimatedTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLAnimatedTexture.h; sourceTree = "<group>"; };
+		B02E2B441833DE980057D12D /* UIFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIFont.cpp; sourceTree = "<group>"; };
+		B02E2B451833DE980057D12D /* UIFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIFont.h; sourceTree = "<group>"; };
 		B0822E9C182AB37300201C5E /* ChestTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ChestTile.cpp; sourceTree = "<group>"; };
 		B0822E9D182AB37300201C5E /* ChestTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChestTile.h; sourceTree = "<group>"; };
 		B0822E9E182AB37300201C5E /* ClearOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClearOptions.cpp; sourceTree = "<group>"; };
@@ -370,6 +373,8 @@
 				6944962D181AD5A300E030C8 /* UIToggle.h */,
 				69449626181ACC3F00E030C8 /* UISideMenu.cpp */,
 				69449627181ACC3F00E030C8 /* UISideMenu.h */,
+				B02E2B441833DE980057D12D /* UIFont.cpp */,
+				B02E2B451833DE980057D12D /* UIFont.h */,
 			);
 			name = UI;
 			path = ../../Common/UI;
@@ -851,6 +856,7 @@
 				B0822EB0182AB37300201C5E /* WaterTile.cpp in Sources */,
 				B0822EB6182AB66900201C5E /* GDRandom.cpp in Sources */,
 				B0822EB7182AB66900201C5E /* GDRandomSearch.cpp in Sources */,
+				B02E2B461833DE980057D12D /* UIFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

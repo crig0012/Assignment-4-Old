@@ -6,6 +6,7 @@
 
 class GameObject;
 class Level;
+class UIFont;
 
 class Game : public Screen
 {
@@ -31,6 +32,9 @@ private:
 
   //Level pointer
   Level* m_Level;
+    
+    //Temp font pointer
+    UIFont* m_Font;
 };
 
 #endif

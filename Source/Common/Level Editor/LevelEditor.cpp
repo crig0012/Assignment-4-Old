@@ -22,7 +22,12 @@ m_TilesMenu(NULL),
 	m_SelectedTileIndex(-1),
 	m_SaveMenu(NULL),
 	m_LoadMenu(NULL)
-{
+{    
+    m_Font = new UIFont("BitmapFont");
+    m_Font->setText("TEXTY TEXT texts .,()!?:%");
+    
+    Log::trace("%f, %f", m_Font->getWidth(), m_Font->getHeight());
+    
 	//Create the Tiles menu items
 	m_TilesMenu = new UISideMenu(this, SideMenuRight);
 	m_TilesMenu->addButton(new UIToggle("MenuTileGround"));
@@ -94,6 +99,12 @@ LevelEditor::~LevelEditor()
 		delete m_LoadMenu;
 		m_LoadMenu = NULL;
 	}
+    
+    if(m_Font != NULL)
+    {
+        delete m_Font;
+        m_Font = NULL;
+    }
 }
 
 const char* LevelEditor::getName()
@@ -155,6 +166,11 @@ void LevelEditor::paint()
 	{
 		m_LoadMenu->paint();
 	}
+    
+    if(m_Font != NULL)
+    {
+        m_Font->draw(100.0f, 100.0f);
+    }
 }
 
 void LevelEditor::reset()

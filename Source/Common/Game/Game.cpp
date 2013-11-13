@@ -5,12 +5,16 @@
 #include "../Constants/Constants.h"
 #include "../Utils/Utils.h"
 #include "../Screen Manager/ScreenManager.h"
+#include "../UI/UIFont.h"
 
 
 Game::Game()
 {
     //Create the level object
     m_Level = new Level();
+    
+    m_Font = new UIFont("BitmapFont");
+    m_Font->setText("TEXTY TEXT");
     
     //Reset everything
     reset();
@@ -23,6 +27,12 @@ Game::~Game()
     {
         delete m_Level;
         m_Level = NULL;
+    }
+    
+    if(m_Font != NULL)
+    {
+        delete m_Font;
+        m_Font = NULL;
     }
 }
 
@@ -39,6 +49,11 @@ void Game::paint()
     if(m_Level != NULL)
     {
         m_Level->paint();
+    }
+    
+    if(m_Font != NULL)
+    {
+        m_Font->draw(100.0f, 100.0f);
     }
 }
 

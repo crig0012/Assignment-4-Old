@@ -59,6 +59,8 @@ public:
 	unsigned int getFormat();
 	unsigned int getId();
     
+    void setSourceFrame(float x, float y, float width, float height);
+    
 	virtual unsigned int getSourceX();
 	virtual unsigned int getSourceY();
 	virtual unsigned int getSourceWidth();
