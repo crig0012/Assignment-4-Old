@@ -32,6 +32,7 @@ public:
     virtual void paintScoreG(int scoreG);
     virtual void paintScoreH(int scoreH);
     virtual void paintScoreF(int scoreF);
+	virtual void paintListColor(OpenGLColor color);
     
     //Paint method to draw the tile's index, drawn from the Level class
     virtual void paintIndex(int index);

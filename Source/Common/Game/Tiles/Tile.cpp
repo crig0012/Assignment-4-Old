@@ -121,6 +121,14 @@ void Tile::paintScoreF(int aScoreF)
     paintScoreNumber(aScoreF, getX() + getWidth() * 0.046875f, getY() + getHeight() * 0.03125f);
 }
 
+void Tile::paintListColor(OpenGLColor color)
+{
+	OpenGLRenderer::getInstance()->setLineWidth(2.0f);
+	OpenGLRenderer::getInstance()->setForegroundColor(color);
+	OpenGLRenderer::getInstance()->drawRectangle(getX(), getY(), getWidth(), getHeight(), false);
+	OpenGLRenderer::getInstance()->setLineWidth(1.0f);
+}
+
 void Tile::paintIndex(int aIndex)
 {
     //Convert the index to a stringstream

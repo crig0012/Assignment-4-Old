@@ -158,9 +158,12 @@
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureCache.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureLoader.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureManager.cpp" />
+    <ClCompile Include="..\..\Common\PathFinding\PathFinder.cpp" />
+    <ClCompile Include="..\..\Common\PathFinding\PathNode.cpp" />
     <ClCompile Include="..\..\Common\Screen Manager\Screen.cpp" />
     <ClCompile Include="..\..\Common\Screen Manager\ScreenManager.cpp" />
     <ClCompile Include="..\..\Common\UI\UIButton.cpp" />
+    <ClCompile Include="..\..\Common\UI\UIFont.cpp" />
     <ClCompile Include="..\..\Common\UI\UISideMenu.cpp" />
     <ClCompile Include="..\..\Common\UI\UIToggle.cpp" />
     <ClCompile Include="..\..\Common\Utils\Logger\Logger.cpp" />
@@ -236,9 +239,12 @@
     <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureCache.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureLoader.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureManager.h" />
+    <ClInclude Include="..\..\Common\PathFinding\PathFinder.h" />
+    <ClInclude Include="..\..\Common\PathFinding\PathNode.h" />
     <ClInclude Include="..\..\Common\Screen Manager\Screen.h" />
     <ClInclude Include="..\..\Common\Screen Manager\ScreenManager.h" />
     <ClInclude Include="..\..\Common\UI\UIButton.h" />
+    <ClInclude Include="..\..\Common\UI\UIFont.h" />
     <ClInclude Include="..\..\Common\UI\UISideMenu.h" />
     <ClInclude Include="..\..\Common\UI\UIToggle.h" />
     <ClInclude Include="..\..\Common\Utils\Logger\Logger.h" />

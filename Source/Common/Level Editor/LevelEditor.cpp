@@ -12,6 +12,7 @@
 #include "../Screen Manager/ScreenManager.h"
 #include "../UI/UIButton.h"
 #include "../UI/UIToggle.h"
+#include "../UI/UIFont.h"
 
 
 LevelEditor::LevelEditor() :
