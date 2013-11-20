@@ -83,8 +83,8 @@ void PathFinder::update(double aDelta)
         return;
     }
     
-    
-    if(isSearchingPath() == true && m_DestinationTileIndex != -1)	
+    //For debugging, switch this to an if
+    while(isSearchingPath() == true && m_DestinationTileIndex != -1)
 	{
 		if(m_PathNodeOpen.size() == 0)
 		{
@@ -139,13 +139,13 @@ void PathFinder::update(double aDelta)
 		{
 			PathNode* adjacentNode = new PathNode(adjacentTile);
 			
-			adjacentNode->setParent(currentNode);
+			adjacentNode->setParentNode(currentNode);
 
-			adjacentNode->setGScore(currentNode->getGScore() + 1);
+			adjacentNode->setScoreG(currentNode->getScoreG() + 1);
 
 			Tile* destinationTile = m_Level->getTileForIndex(m_DestinationTileIndex);
 			int scoreH = getManhattanDistanceCost(adjacentTile, destinationTile);
-			adjacentNode->setHScore(scoreH);
+			adjacentNode->setScoreH(scoreH);
 
 			addPathNodeToOpenList(adjacentNode);
 		}
@@ -154,10 +154,10 @@ void PathFinder::update(double aDelta)
 		{
 			PathNode* existingNode = getOpenPathNodeForTile(adjacentTile);
 			
-			if(currentNode->getGScore() +1 < existingNode->getGScore())
+			if(currentNode->getScoreG() +1 < existingNode->getScoreG())
 			{
-				existingNode->setGScore(currentNode->getGScore() + 1);
-				existingNode->setParent(currentNode);
+				existingNode->setScoreG(currentNode->getScoreG() + 1);
+				existingNode->setParentNode(currentNode);
 
 				sortOpenList();
 			}

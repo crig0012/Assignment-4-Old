@@ -11,12 +11,15 @@
 #include "Tiles/Tile.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
+#include "PathNode.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
 
 Player::Player(Level* aLevel)
 {
+    //Create the PathFinder object
+    m_PathFinder = new PathFinder(aLevel, this);
     //Initialize the current and destination tiles to NULL
     m_CurrentTile = NULL;
     m_DestinationTile = NULL;
@@ -32,6 +35,12 @@ Player::Player(Level* aLevel)
 
 Player::~Player()
 {
+    if(m_PathFinder != NULL)
+    {
+        delete m_PathFinder;
+        m_PathFinder = NULL;
+    }
+    
     //Set the current and desination tiles to NULL
 	m_CurrentTile = NULL;
 	m_DestinationTile = NULL;
@@ -39,9 +48,60 @@ Player::~Player()
 
 void Player::update(double aDelta)
 {
-    if(m_DestinationTile != NULL)
+    if(m_PathFinder->isSearchingPath() == true)
     {
-        setCurrentTile(m_DestinationTile);
+        m_PathFinder->update(aDelta);
+    }
+    
+    //Handle Player animation
+    if(isAnimating() == true && m_AnimationPathNodeIndex > -1)
+    {
+        PathNode * pathNode = m_PathFinder->getPathNodeAtIndex(m_AnimationPathNodeIndex);
+        Tile* tile = pathNode != NULL ? pathNode->getTile() : NULL;
+        
+        //Saftey check that tile isn't NULL
+        if(tile != NULL)
+        {
+            //Calculate the center of the tile
+            float centerX = tile->getX() + (tile->getWidth() - getWidth()) / 2.0f;
+            float centerY = tile->getY() + (tile->getHeight() - getHeight()) / 2.0f;
+            
+            //Next calculate how much the player should animate this update() call,
+            //use the animate() method to help calculate
+            float playerX = animate(getX(), centerX, aDelta);
+            float playerY = animate(getY(), centerY, aDelta);
+            
+            setPosition(playerX, playerY);
+            
+            //Has the player reached the center of the tile?
+            if(playerX == centerX && playerY == centerY)
+            {
+                m_AnimationPathNodeIndex++;
+                
+                //Set the current tile's flag to false
+                m_CurrentTile->setIsPath(false);
+                
+                //Set the new current tile
+                setCurrentTile(tile);
+                
+                //Are we done animating completely?
+                if(m_AnimationPathNodeIndex >= m_PathFinder->getPathSize())
+                {
+                    stopAnimating();
+                    m_CurrentTile->setIsPath(false);
+                }
+                
+                //Is the abort animation flag set?
+                if(m_AbortAnimation == true)
+                {
+                    //Reset the flag to false
+                    m_AbortAnimation = false;
+                    
+                    //Begin searching the new path
+                    findPath();
+                }
+            }
+        }
     }
 }
 
@@ -55,6 +115,13 @@ void Player::paint()
 
 void Player::reset()
 {
+    //Stop animating the player
+    stopAnimating();
+    
+    //Reset the pathFinder
+    m_PathFinder->reset();
+    
+    //Set the destination tile to null
     m_DestinationTile = NULL;
 }
 
@@ -76,6 +143,41 @@ void Player::setDestinationTile(Tile* tile)
 {
 	//Set the destination tile pointer
 	m_DestinationTile = tile;
+    
+    //Start pathfinding
+    if(isAnimating() == false)
+    {
+        findPath();
+    }
+    
+    else
+    {
+        m_AbortAnimation = true;
+    }
+}
+
+void Player::pathFinderFinishedSearching(PathFinder* pathFinder, bool pathWasFound)
+{
+    if(pathFinder == m_PathFinder)
+    {
+        startAnimating();
+    }
+    
+    else
+    {
+        
+    }
+}
+
+PathFinder* Player::getPathFinder()
+{
+    return m_PathFinder;
+}
+
+void Player::findPath()
+{
+    m_PathFinder->reset();
+    m_PathFinder->findPath(m_CurrentTile, m_DestinationTile);
 }
 
 float Player::animate(float aCurrent, float aTarget, double aDelta)

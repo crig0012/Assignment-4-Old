@@ -8,6 +8,7 @@
 
 #include "Level.h"
 #include "Player.h"
+#include "PathFinder.h"
 #include "Tiles/Tile.h"
 #include "Tiles/TreeTile.h"
 #include "Tiles/GroundTile.h"
@@ -141,7 +142,7 @@ void Level::paint()
 		//draw the path scoring
 		if(m_PaintTileScoring == true)
 		{
-			//TODO: Paint the tile scores
+			m_Player->getPathFinder()->paint();
 		}
 
 		//Paint the player
@@ -205,6 +206,13 @@ void Level::keyUpEvent(int keyCode)
 	{
 		togglePaintTileIndexes();
 	}
+    else if(keyCode == KEYCODE_D)
+    {
+        if(m_Player != NULL)
+        {
+            m_Player->getPathFinder()->togglePathFindingDelay();
+        }
+    }
 }
 
 void Level::load(const char* levelName)

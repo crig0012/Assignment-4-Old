@@ -15,6 +15,7 @@
 
 MainMenu::MainMenu() : Menu(NULL, NULL)
 {
+    addButton(new UIButton("ButtonLoadLevel"));
     addButton(new UIButton("ButtonLevelEditor"));
     addButton(new UIButton("ButtonExit"));
 }
@@ -32,12 +33,16 @@ const char* MainMenu::getName()
 void MainMenu::buttonAction(UIButton* button)
 {
     int index = getIndexForButton(button);
-     
-	if(index == 0)
+    
+    if(index == 0)
+    {
+        ScreenManager::getInstance()->switchScreen(GAME_SCREEN_NAME);
+    }
+	if(index == 1)
     {
         ScreenManager::getInstance()->switchScreen(LEVEL_EDITOR_SCREEN_NAME);
     }
-    else if (index == 1)
+    else if (index == 2)
     {
         exit(1);
     }

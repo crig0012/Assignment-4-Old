@@ -1,77 +1,90 @@
+//
+//  PathNode.cpp
+//  GAM-1514 OSX Game
+//
+//  Created by Bradley Flood on 2013-11-13.
+//  Copyright (c) 2013 Algonquin College. All rights reserved.
+//
+
 #include "PathNode.h"
+#include "Tile.h"
+#include <stdlib.h>
 
 
 PathNode::PathNode(Tile* tile) :
-	m_Tile(tile),
-	m_ScoreG(0),
-	m_ScoreH(0),
-	m_ParentNode(NULL)
+    m_Tile(tile),
+    m_ScoreG(0),
+    m_ScoreH(0),
+    m_ParentNode(NULL)
 {
 
 }
 
-
 PathNode::~PathNode()
 {
-	m_Tile = NULL;
-	m_ParentNode = NULL;
+    m_Tile = NULL;
+    m_ParentNode = NULL;
 }
 
 void PathNode::paintScore(OpenGLColor color)
 {
-	if(m_Tile != NULL)
-	{
-		if(getGScore() != 0 && getHScore() != 0)
-		{
-			m_Tile->paintListColor(color);
-			m_Tile->paintScoreF(getFScore());
-			m_Tile->paintScoreG(getGScore());
-			m_Tile->paintScoreH(getHScore());
-		}
-	}
+    if(m_Tile != NULL)
+    {
+        if(getScoreF() != 0)
+        {
+            m_Tile->paintScore(color, getScoreG(), getScoreH(), getScoreF());
+        }
+    }
 }
 
 Tile* PathNode::getTile()
 {
-	return m_Tile;
+    return m_Tile;
 }
 
-int PathNode::getGScore()
+int PathNode::getScoreG()
 {
-	return m_ScoreG;
+    return m_ScoreG;
 }
 
-void PathNode::setGScore(int score)
+int PathNode::getScoreH()
 {
-	m_ScoreG = score;
+    return m_ScoreH;
 }
 
-int PathNode::getHScore()
+int PathNode::getScoreF()
 {
-	return m_ScoreH;
-}
-
-void PathNode::setHScore(int score)
-{
-	m_ScoreH = score;
+    return getScoreG()+ getScoreH();
 }
 
 PathNode* PathNode::getParentNode()
 {
-	return m_ParentNode;
+    return m_ParentNode;
 }
 
-void PathNode::setParent(PathNode* parent)
+void PathNode::setScoreG(int scoreG)
 {
-	m_ParentNode = parent;
+    m_ScoreG = scoreG;
 }
 
-int PathNode::getFScore()
+void PathNode::setScoreH(int scoreH)
 {
-	return getGScore() + getHScore();
+    m_ScoreH = scoreH;
+}
+
+void PathNode::setParentNode(PathNode* parentNode)
+{
+    m_ParentNode = parentNode;
 }
 
 bool PathNode::compareNodes(PathNode* nodeA, PathNode* nodeB)
 {
-	return nodeA->getFScore() < nodeB->getFScore();
+    return nodeA->getScoreF() < nodeB->getScoreF();
 }
+
+
+
+
+
+
+

@@ -29,10 +29,7 @@ public:
     virtual void reset();
     
     //Paint methods to draw the tile score, drawn from the PathFinding class
-    virtual void paintScoreG(int scoreG);
-    virtual void paintScoreH(int scoreH);
-    virtual void paintScoreF(int scoreF);
-	virtual void paintListColor(OpenGLColor color);
+    virtual void paintScore(OpenGLColor color, int scoreG, int scoreH, int scoreF);
     
     //Paint method to draw the tile's index, drawn from the Level class
     virtual void paintIndex(int index);
@@ -55,8 +52,16 @@ public:
 	virtual bool isPath();
     
 protected:
+    enum ScoreNumberPosition
+    {
+        TopLeft = 0,
+        BottomLeft,
+        BottomRight
+    };
+
     //Conveniance method to paint a score number and a certain position
-    void paintScoreNumber(int number, float x, float y);
+    void paintScoreNumber(int number, ScoreNumberPosition position, float scale, float padding);
+    float getScoreNumberScale(int number, float padding);
     
     //Member variables
     TileType m_TileType;

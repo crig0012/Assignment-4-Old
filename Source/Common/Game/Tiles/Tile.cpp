@@ -106,27 +106,22 @@ void Tile::reset()
     m_IsPath = false;
 }
 
-void Tile::paintScoreG(int aScoreG)
+void Tile::paintScore(OpenGLColor color, int scoreG, int scoreH, int scoreF)
 {
-    paintScoreNumber(aScoreG, getX() + getWidth() * 0.046875f, getY() + getHeight() * 0.765625f);
-}
+    //Paint the color tile outline
+    OpenGLRenderer::getInstance()->setLineWidth(2.0f);
+    OpenGLRenderer::getInstance()->setForegroundColor(color);
+    OpenGLRenderer::getInstance()->drawRectangle(getX(), getY(), getWidth(), getHeight(), false);
+    OpenGLRenderer::getInstance()->setLineWidth(1.0f);
 
-void Tile::paintScoreH(int aScoreH)
-{
-    paintScoreNumber(aScoreH, getX() + getWidth() * 0.65f, getY() + getHeight() * 0.765625f);
-}
+    //Get the scale, we get the smallest one for consistency
+    float padding = 1.0f;
+    float scale = fminf(getScoreNumberScale(scoreG, padding), fminf(getScoreNumberScale(scoreH, padding), getScoreNumberScale(scoreF, padding)));
 
-void Tile::paintScoreF(int aScoreF)
-{
-    paintScoreNumber(aScoreF, getX() + getWidth() * 0.046875f, getY() + getHeight() * 0.03125f);
-}
-
-void Tile::paintListColor(OpenGLColor color)
-{
-	OpenGLRenderer::getInstance()->setLineWidth(2.0f);
-	OpenGLRenderer::getInstance()->setForegroundColor(color);
-	OpenGLRenderer::getInstance()->drawRectangle(getX(), getY(), getWidth(), getHeight(), false);
-	OpenGLRenderer::getInstance()->setLineWidth(1.0f);
+    //Paint the scores
+    paintScoreNumber(scoreG, BottomLeft, scale, padding);
+    paintScoreNumber(scoreH, BottomRight, scale, padding);
+    paintScoreNumber(scoreF, TopLeft, scale, padding);
 }
 
 void Tile::paintIndex(int aIndex)
@@ -176,17 +171,54 @@ void Tile::paintIndex(int aIndex)
     }
 }
 
-void Tile::paintScoreNumber(int aNumber, float aX, float aY)
+void Tile::paintScoreNumber(int number, ScoreNumberPosition position, float scale, float padding)
 {
     //Check to see if its a walkable tile
     if(isWalkableTile() == true)
     {
         //Convert the number to a stringstream
         std::stringstream numberStream;
-        numberStream << aNumber;
+        numberStream << number;
         
         //Next convert the stringstream into a string
         std::string numberString(numberStream.str());
+        
+        //Cycle through each number in the string and calculate the total width of the string
+        float stringWidth = 0.0f;
+        float stringHeight = 0.0f;
+        for(int i = 0; i < numberString.length(); i++)
+        {
+            //Convert the letter in the string back to an int
+            int index = atoi(numberString.substr(i,1).c_str());
+            
+            //Increment the X value
+            stringWidth += m_TileScoreNumbers[index]->getSourceWidth();
+            stringHeight = stringHeight < m_TileScoreNumbers[index]->getSourceHeight() ? m_TileScoreNumbers[index]->getSourceHeight() : stringHeight;
+        }
+        
+        float scaledWidth = stringWidth * scale;
+        float scaledHeight = stringHeight * scale;
+        float x = 0.0f;
+        float y = 0.0f;
+        
+        //Calculate the x and y position based on the string width and height
+        switch (position)
+        {
+            case TopLeft:
+            x = getX() + padding;
+            y = getY() + padding;
+            break;
+
+            case BottomLeft:
+            x = getX() + padding;
+            y = getY() + getHeight() - scaledHeight - padding;
+            break;
+
+            case BottomRight:
+            x = getX() + getWidth() - scaledWidth - padding;
+            y = getY() + getHeight() - scaledHeight - padding;
+            break;
+        }
         
         //Cycle through each number in the string and draw it
         for(int i = 0; i < numberString.length(); i++)
@@ -194,13 +226,43 @@ void Tile::paintScoreNumber(int aNumber, float aX, float aY)
             //Convert the letter in the string back to an int
             int index = atoi(numberString.substr(i,1).c_str());
             
+            //Calculate the scaled width and height
+            float width = m_TileScoreNumbers[index]->getSourceWidth() * scale;
+            float height = m_TileScoreNumbers[index]->getSourceHeight() * scale;
+            
             //Draw the texture that is equivalent to the number
-            OpenGLRenderer::getInstance()->drawTexture(m_TileScoreNumbers[index], aX, aY);
+            OpenGLRenderer::getInstance()->drawTexture(m_TileScoreNumbers[index], x, y, width, height);
             
             //Increment the X value
-            aX += m_TileScoreNumbers[index]->getSourceWidth();
+            x += m_TileScoreNumbers[index]->getSourceWidth() * scale;
         }
     }
+}
+
+float Tile::getScoreNumberScale(int number, float padding)
+{
+    //Convert the number to a stringstream
+    std::stringstream numberStream;
+    numberStream << number;
+    
+    //Next convert the stringstream into a string
+    std::string numberString(numberStream.str());
+    
+    //Cycle through each number in the string and calculate the total width of the string
+    float stringWidth = 0.0f;
+    float stringHeight = 0.0f;
+    for(int i = 0; i < numberString.length(); i++)
+    {
+        //Convert the letter in the string back to an int
+        int index = atoi(numberString.substr(i,1).c_str());
+        
+        //Increment the X value
+        stringWidth += m_TileScoreNumbers[index]->getSourceWidth();
+        stringHeight = stringHeight < m_TileScoreNumbers[index]->getSourceHeight() ? m_TileScoreNumbers[index]->getSourceHeight() : stringHeight;
+    }
+    
+    float scale = fminf(((m_Width - padding * 2.0f) / 2.0f) / stringWidth, 1.0f);
+    return scale;
 }
 
 TileType Tile::getTileType()

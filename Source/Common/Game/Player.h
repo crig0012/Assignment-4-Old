@@ -10,12 +10,13 @@
 #define PLAYER_H
 
 #include "GameObject.h"
+#include "PathFinder.h"
 #include <vector>
 
 class Level;
 class Tile;
 
-class Player : public GameObject
+class Player : public GameObject, public PathFinderListener
 {
 public:
 	Player(Level* level);
@@ -24,7 +25,7 @@ public:
   //Update, paint and reset methods
 	void update(double delta);
 	void paint();
-  void reset();
+    void reset();
   
   //Implementing GameObject's pure virtual method
   const char* getType();
@@ -34,17 +35,28 @@ public:
 	void setDestinationTile(Tile* tile);
 
 protected:
-  //Animation methods
-  float animate(float current, float target, double delta);
+    //PathFinder Listener method
+    void pathFinderFinishedSearching(PathFinder* pathFinder, bool pathWasFound);
+    
+    //PathFinder methods
+    PathFinder* getPathFinder();
+    void findPath();
+    
+    //Animation methods
+    float animate(float current, float target, double delta);
 	void startAnimating();
 	void stopAnimating();
-  bool isAnimating();
+    bool isAnimating();
+    
+    //Friend class Level so that it can access the protected members
+    friend class Level;
 
 private:
+    PathFinder* m_PathFinder;
 	Tile* m_CurrentTile;
 	Tile* m_DestinationTile;
 	bool m_CanAnimate;
-  bool m_AbortAnimation;
+    bool m_AbortAnimation;
 	int m_AnimationPathNodeIndex;
 };
 
