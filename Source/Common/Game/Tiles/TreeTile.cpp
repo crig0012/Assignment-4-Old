@@ -25,3 +25,8 @@ const char* TreeTile::getType()
 {
     return TILE_TREE_TYPE;
 }
+
+float TreeTile::getTileSpeed()
+{
+    return 0.8f;
+}

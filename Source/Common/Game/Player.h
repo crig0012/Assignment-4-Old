@@ -28,7 +28,7 @@ public:
     void reset();
   
   //Implementing GameObject's pure virtual method
-  const char* getType();
+  virtual const char* getType() = 0;
   
   //Setter methods for the current and destination tiles
 	void setCurrentTile(Tile* tile);
@@ -43,7 +43,7 @@ protected:
     void findPath();
     
     //Animation methods
-    float animate(float current, float target, double delta);
+    float animate(float current, float target, double delta, float speed);
 	void startAnimating();
 	void stopAnimating();
     bool isAnimating();
@@ -51,13 +51,14 @@ protected:
     //Friend class Level so that it can access the protected members
     friend class Level;
 
-private:
+    Level* m_Level;
     PathFinder* m_PathFinder;
 	Tile* m_CurrentTile;
 	Tile* m_DestinationTile;
 	bool m_CanAnimate;
     bool m_AbortAnimation;
 	int m_AnimationPathNodeIndex;
+    float m_Speed;
 };
 
 #endif

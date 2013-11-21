@@ -1,27 +1,25 @@
 //
-//  TreeTile.h
+//  WaterTile.h
 //  GAM-1532 OSX Game
 //
 //  Created by Bradley Flood on 2013-03-07.
 //  Copyright (c) 2013 Algonquin College. All rights reserved.
 //
 
-#ifndef TREE_TILE_H
-#define TREE_TILE_H
+#ifndef __GAM_1514_OSX_Game__SpawnPointHero__
+#define __GAM_1514_OSX_Game__SpawnPointHero__
 
 #include "Tile.h"
 
 
-class TreeTile : public Tile
+class SpawnPointHero : public Tile
 {
 public:
-	TreeTile(const char* textureName = RES_TILE_TREE);
-	virtual ~TreeTile();
-  
+	SpawnPointHero(const char* textureName = RES_TILE_WATER);
+	virtual ~SpawnPointHero();
+    
     //Return the type of the tile
     const char* getType();
-    
-    float getTileSpeed();
 };
 
 #endif

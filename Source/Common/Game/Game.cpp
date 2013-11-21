@@ -14,7 +14,7 @@ Game::Game()
     m_Level = new Level();
     
     m_Font = new UIFont("BitmapFont");
-    m_Font->setText("TEXTY TEXT");
+    //m_Font->setText("TEXTY TEXT");
     
     //Reset everything
     reset();

@@ -8,6 +8,8 @@
 
 #include "Level.h"
 #include "Player.h"
+#include "Hero.h"
+#include "Enemy.h"
 #include "PathFinder.h"
 #include "Tiles/Tile.h"
 #include "Tiles/TreeTile.h"
@@ -30,16 +32,30 @@ m_HorizontalTiles(0),
 	m_VerticalTiles(0),
 	m_TileSize(EMPTY_LEVEL_TILE_SIZE),
 	m_PlayerStartingTileIndex(EMPTY_LEVEL_STARTING_PLAYER_TILE_INDEX),
-	m_Player(NULL),
+	m_Hero(NULL),
 	m_Tiles(NULL),
 	m_SelectedTileIndex(-1),
 	m_PaintTileScoring(false),
 	m_PaintTileIndexes(false)
 {
-	//Create the player object
+	//Create the hero object
 	if(isEditingLevel == false)
 	{
-		m_Player = new Player(this);
+		m_Hero = new Hero(this);
+        
+        //TODO: Make constants for these
+        float min = 50.0f;
+        float max = PLAYER_SPEED - 25.0f;
+        GDRandom random;
+        random.randomizeSeed();
+        
+        //Create the enemy objects
+        for(int i =0; i < ENEMY_COUNT; i++)
+        {
+            float speed = min + random.random(max-min);
+            Enemy* enemy = new Enemy(this, speed);
+            m_Enemies.push_back(enemy);
+        }
 	}
 
 	//Calculate the number of horizontal and vertical tiles
@@ -62,12 +78,21 @@ m_HorizontalTiles(0),
 Level::~Level()
 {
 	//Delete the player object
-	if(m_Player != NULL)
+	if(m_Hero != NULL)
 	{
-		delete m_Player;
-		m_Player = NULL;
+		delete m_Hero;
+		m_Hero = NULL;
 	}
 
+    //Delete the enemy object
+    for(int i = 0; i < m_Enemies.size(); i++)
+    {
+        delete m_Enemies.at(i);
+        m_Enemies.at(i) = NULL;
+    }
+    
+    m_Enemies.clear();
+    
 	//Delete the tiles array, the inheriting class
 	//must delete the object in this array itself
 	if(m_Tiles != NULL)
@@ -108,11 +133,17 @@ void Level::update(double aDelta)
 		}
 	}
 
-	//Update the Player
-	if(m_Player != NULL)
+	//Update the Hero
+	if(m_Hero != NULL)
 	{
-		m_Player->update(aDelta);
+		m_Hero->update(aDelta);
 	}
+    
+    //Update the enemy object
+    for(int i = 0; i < m_Enemies.size(); i++)
+    {
+        m_Enemies.at(i)->update(aDelta);
+    }
 }
 
 void Level::paint()
@@ -135,19 +166,25 @@ void Level::paint()
 		}
 	}
 
-	//Paint the Player
-	if(m_Player != NULL)
+	//Paint the Hero
+	if(m_Hero != NULL)
 	{
 		//If paint tile scoring flag is set to true,
 		//draw the path scoring
 		if(m_PaintTileScoring == true)
 		{
-			m_Player->getPathFinder()->paint();
+			m_Hero->getPathFinder()->paint();
 		}
 
 		//Paint the player
-		m_Player->paint();
+		m_Hero->paint();
 	}
+    
+    //Paint the enemies
+    for(int i =0; i < m_Enemies.size(); i++)
+    {
+        m_Enemies.at(i)->paint();
+    }
 }
 
 void Level::reset()
@@ -162,34 +199,71 @@ void Level::reset()
 		}
 	}
 
-	//Reset the Player
-	if(m_Player != NULL)
-	{
-		m_Player->reset();
-		m_Player->setCurrentTile(m_Tiles[m_PlayerStartingTileIndex]);
-	}
+    std::vector<Player*> players;
+    
+    if(m_Hero != NULL)
+    {
+        players.push_back(m_Hero);
+    }
+    
+    for(int i =0; i < m_Enemies.size(); i++)
+    {
+        players.push_back(m_Enemies.at(i));
+    }
+    
+    //Random number generator for the spawn indexes
+    GDRandom random;
+    random.randomizeSeed();
+    int tileIndex = -1;
+    std::vector<int> usedTileIndexes;
+    std::vector<int> spawnPoints;
+    
+    //Cycle through the Players objects
+    for(int i = 0; i < players.size()/2; i++)
+    {
+        //Set tileIndex to -1
+        tileIndex = -1;
+        
+        while(tileIndex == -1)
+        {
+            tileIndex = random.random(getNumberOfTiles());
+            
+            //Saftey check that it is a walkable tile
+            if(getTileForIndex(tileIndex)->isWalkableTile() == false)
+            {
+                tileIndex = -1;
+            }
+            
+            else
+            {
+                //Cycle through and ensure the index hasn't already been used
+                for(int j = 0; j < usedTileIndexes.size(); j++)
+                {
+                    if(usedTileIndexes.at(j) == tileIndex)
+                    {
+                        tileIndex = -1;
+                        break;
+                    }
+                }
+                
+                //Saftey check that tileIndex isn't -1
+                if(tileIndex != -1)
+                {
+                    players.at(i)->setCurrentTile(getTileForIndex(tileIndex));
+                    players.at(i)->reset();
+                    usedTileIndexes.push_back(tileIndex);
+                }
+            }
+        }
+    }
 }
 
 void Level::mouseLeftClickUpEvent(float aPositionX, float aPositionY)
 {
-	//Convert the mouse click position, into a tile index
-	int index = getTileIndexForPosition(aPositionX, aPositionY);
-
-	//Safety check that the tile isn't NULL
-	if(m_Tiles[index] != NULL)
-	{
-		//Set the selected tile index
-		setSelectedTileIndex(index);
-
-		//If the tile is walkable, set the player's destination tile
-		if(m_Tiles[index]->isWalkableTile() == true)
-		{
-			if(m_Player != NULL)
-			{
-				m_Player->setDestinationTile(m_Tiles[m_SelectedTileIndex]);
-			}
-		}
-	}
+	if(m_Hero != NULL)
+    {
+        m_Hero->mouseLeftClickUpEvent(aPositionX, aPositionY);
+    }
 }
 
 void Level::keyUpEvent(int keyCode)
@@ -208,9 +282,9 @@ void Level::keyUpEvent(int keyCode)
 	}
     else if(keyCode == KEYCODE_D)
     {
-        if(m_Player != NULL)
+        if(m_Hero != NULL)
         {
-            m_Player->getPathFinder()->togglePathFindingDelay();
+            m_Hero->getPathFinder()->togglePathFindingDelay();
         }
     }
 }
@@ -363,6 +437,11 @@ int Level::getTileIndexForTile(Tile* aTile)
 	return getTileIndexForPosition(aTile->getX(), aTile->getY());
 }
 
+int Level::getTileIndexForPlayer(Player* player)
+{
+    return getTileIndexForPosition(player->getX(), player->getY());
+}
+
 Tile* Level::getTileForPosition(int aPositionX, int aPositionY)
 {
 	return getTileForIndex(getTileIndexForPosition(aPositionX, aPositionY));
@@ -383,6 +462,11 @@ Tile* Level::getTileForIndex(int aIndex)
 
 	//If we got here, it means the index passed in was out of bounds
 	return NULL;
+}
+
+Tile* Level::getTileForPlayer(Player *player)
+{
+    return getTileForPosition(player->getX(), player->getY());
 }
 
 void Level::setTileTypeAtPosition(TileType tileType, int positionX, int positionY)
@@ -480,4 +564,9 @@ void Level::setSelectedTileIndex(int aSelectedIndex)
 	{
 		m_Tiles[m_SelectedTileIndex]->setIsSelected(true);
 	}
+}
+
+Hero* Level::getHero()
+{
+    return m_Hero;
 }

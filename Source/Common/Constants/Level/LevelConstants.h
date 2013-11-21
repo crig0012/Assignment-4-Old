@@ -20,6 +20,8 @@ enum TileType
   TileTypeTower,
   TileTypeChest,
   TileTypeCount,
+  TileTypeSpawnHero,
+  TileTypeSpawnEnemy,
   TileTypeUnknown
 };
 

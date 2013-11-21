@@ -270,6 +270,17 @@ TileType Tile::getTileType()
     return m_TileType;
 }
 
+
+float Tile::getTileSpeed()
+{
+    return 1.0f;
+}
+
+float Tile::getMovementCost()
+{
+    return 1.0f / getTileSpeed();
+}
+
 bool Tile::isWalkableTile()
 {
     return m_IsWalkableTile;

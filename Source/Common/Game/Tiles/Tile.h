@@ -39,6 +39,8 @@ public:
     
     //
     virtual TileType getTileType();
+    virtual float getTileSpeed();
+    virtual float getMovementCost();
     
     //Is this a walkable tile, can the user walk on the tile
     virtual bool isWalkableTile();

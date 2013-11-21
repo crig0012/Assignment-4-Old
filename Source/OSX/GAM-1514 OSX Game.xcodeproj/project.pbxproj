@@ -98,6 +98,8 @@
 		B0822EB0182AB37300201C5E /* WaterTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EA8182AB37300201C5E /* WaterTile.cpp */; };
 		B0822EB6182AB66900201C5E /* GDRandom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EB2182AB66900201C5E /* GDRandom.cpp */; };
 		B0822EB7182AB66900201C5E /* GDRandomSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */; };
+		B0B08E72183E98AE005A0A3E /* Hero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B08E70183E98AE005A0A3E /* Hero.cpp */; };
+		B0B08E75183E98C3005A0A3E /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B08E73183E98C2005A0A3E /* Enemy.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -282,6 +284,14 @@
 		B0822EB3182AB66900201C5E /* GDRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDRandom.h; sourceTree = "<group>"; };
 		B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GDRandomSearch.cpp; sourceTree = "<group>"; };
 		B0822EB5182AB66900201C5E /* GDRandomSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDRandomSearch.h; sourceTree = "<group>"; };
+		B0B08E70183E98AE005A0A3E /* Hero.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Hero.cpp; sourceTree = "<group>"; };
+		B0B08E71183E98AE005A0A3E /* Hero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hero.h; sourceTree = "<group>"; };
+		B0B08E73183E98C2005A0A3E /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		B0B08E74183E98C3005A0A3E /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		B0B08E83183EB72B005A0A3E /* SpawnPointEnemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpawnPointEnemy.cpp; sourceTree = "<group>"; };
+		B0B08E84183EB72B005A0A3E /* SpawnPointEnemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpawnPointEnemy.h; sourceTree = "<group>"; };
+		B0B08E85183EB72B005A0A3E /* SpawnPointHero.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpawnPointHero.cpp; sourceTree = "<group>"; };
+		B0B08E86183EB72C005A0A3E /* SpawnPointHero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpawnPointHero.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -408,6 +418,10 @@
 		6944960A181ABCFA00E030C8 /* Tiles */ = {
 			isa = PBXGroup;
 			children = (
+				B0B08E83183EB72B005A0A3E /* SpawnPointEnemy.cpp */,
+				B0B08E84183EB72B005A0A3E /* SpawnPointEnemy.h */,
+				B0B08E85183EB72B005A0A3E /* SpawnPointHero.cpp */,
+				B0B08E86183EB72C005A0A3E /* SpawnPointHero.h */,
 				B0822E9C182AB37300201C5E /* ChestTile.cpp */,
 				B0822E9D182AB37300201C5E /* ChestTile.h */,
 				B0822E9E182AB37300201C5E /* ClearOptions.cpp */,
@@ -588,6 +602,10 @@
 				69449608181ABCFA00E030C8 /* Player.cpp */,
 				69449609181ABCFA00E030C8 /* Player.h */,
 				6944960A181ABCFA00E030C8 /* Tiles */,
+				B0B08E70183E98AE005A0A3E /* Hero.cpp */,
+				B0B08E71183E98AE005A0A3E /* Hero.h */,
+				B0B08E73183E98C2005A0A3E /* Enemy.cpp */,
+				B0B08E74183E98C3005A0A3E /* Enemy.h */,
 			);
 			name = Game;
 			path = ../../Common/Game;
@@ -878,6 +896,8 @@
 				B02E2B461833DE980057D12D /* UIFont.cpp in Sources */,
 				B0722B9A183D2B5E002A234E /* PathFinder.cpp in Sources */,
 				B0722B9B183D2B5E002A234E /* PathNode.cpp in Sources */,
+				B0B08E72183E98AE005A0A3E /* Hero.cpp in Sources */,
+				B0B08E75183E98C3005A0A3E /* Enemy.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

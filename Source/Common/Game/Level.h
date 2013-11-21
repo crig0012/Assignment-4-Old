@@ -10,10 +10,13 @@
 #define LEVEL_H
 
 #include "../Constants/Constants.h"
+#include <vector>
 
 
 class Tile;
 class Player;
+class Hero;
+class Enemy;
 
 class Level
 {
@@ -52,11 +55,13 @@ public:
 	int getTileIndexForPosition(int positionX, int positionY);
 	int getTileIndexForCoordinates(int coordinatesX, int coordinatesY);
 	int getTileIndexForTile(Tile* tile);
+    int getTileIndexForPlayer(Player* player);
     
 	//Tile methods
 	Tile* getTileForPosition(int positionX, int positionY);
 	Tile* getTileForCoordinates(int coordinatesX, int coordinatesY);
 	Tile* getTileForIndex(int index);
+    Tile* getTileForPlayer(Player* player);
     
     //
     void setTileTypeAtPosition(TileType tileType, int positionX, int positionY);
@@ -68,14 +73,17 @@ public:
     void togglePaintTileIndexes();
 	void randomizeLevel();
 	
+    //Disables the old tiles selection (if ground tile) and
+	//enables the newly selected tiles selection (if ground tile)
+	void setSelectedTileIndex(int selectedIndex);
+    
+    //Getter method for the Hero*
+    Hero* getHero();
     
 protected:
-	//Disables the old tiles selection (if ground tile) and
-	//enables the newly selected tiles selection (if ground tile)
-	
-    
 	//Protected Member variables
-	Player* m_Player;
+	Hero* m_Hero;
+    std::vector<Enemy*> m_Enemies;
 	Tile** m_Tiles;
 	unsigned int m_HorizontalTiles;
 	unsigned int m_VerticalTiles;
@@ -84,7 +92,6 @@ protected:
 	int m_SelectedTileIndex;
     bool m_PaintTileScoring;
     bool m_PaintTileIndexes;
-	void setSelectedTileIndex(int selectedIndex);
 };
 
 #endif

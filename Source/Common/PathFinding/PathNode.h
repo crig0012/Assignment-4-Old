@@ -24,14 +24,14 @@ public:
     
     Tile* getTile();
     
-    int getScoreG();
-    int getScoreH();
-    int getScoreF();
+    float getScoreG();
+    float getScoreH();
+    float getScoreF();
     
     PathNode* getParentNode();
     
-    void setScoreG(int scoreG);
-    void setScoreH(int scoreH);
+    void setScoreG(float scoreG);
+    void setScoreH(float scoreH);
     
     void setParentNode(PathNode* parentNode);
     
@@ -39,8 +39,8 @@ public:
     
 private:
     Tile* m_Tile;
-    int m_ScoreG;
-    int m_ScoreH;
+    float m_ScoreG;
+    float m_ScoreH;
     PathNode* m_ParentNode;
 };
 

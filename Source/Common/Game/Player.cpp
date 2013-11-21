@@ -18,6 +18,8 @@
 
 Player::Player(Level* aLevel)
 {
+    m_Level = aLevel;
+    
     //Create the PathFinder object
     m_PathFinder = new PathFinder(aLevel, this);
     //Initialize the current and destination tiles to NULL
@@ -28,6 +30,9 @@ Player::Player(Level* aLevel)
     m_CanAnimate = false;
     m_AbortAnimation = false;
     m_AnimationPathNodeIndex = -1;
+    
+    //Set the player speed
+    m_Speed = PLAYER_SPEED;
     
     //Initialize the player's size
     setSize(PLAYER_SIZE, PLAYER_SIZE);
@@ -66,10 +71,14 @@ void Player::update(double aDelta)
             float centerX = tile->getX() + (tile->getWidth() - getWidth()) / 2.0f;
             float centerY = tile->getY() + (tile->getHeight() - getHeight()) / 2.0f;
             
+            //Get the tile speed for the tilw the player is on
+            Tile* playerTile = m_Level->getTileForPosition(getX(), getY());
+            float speed = playerTile->getTileSpeed();
+            
             //Next calculate how much the player should animate this update() call,
             //use the animate() method to help calculate
-            float playerX = animate(getX(), centerX, aDelta);
-            float playerY = animate(getY(), centerY, aDelta);
+            float playerX = animate(getX(), centerX, aDelta, speed);
+            float playerY = animate(getY(), centerY, aDelta, speed);
             
             setPosition(playerX, playerY);
             
@@ -125,11 +134,6 @@ void Player::reset()
     m_DestinationTile = NULL;
 }
 
-const char* Player::getType()
-{
-    return PLAYER_TYPE;
-}
-
 void Player::setCurrentTile(Tile* tile)
 {
 	//Set the current tile pointer
@@ -144,6 +148,7 @@ void Player::setDestinationTile(Tile* tile)
 	//Set the destination tile pointer
 	m_DestinationTile = tile;
     
+    //TODO: Check if removing this will allow the player to constantly change their destination
     //Start pathfinding
     if(isAnimating() == false)
     {
@@ -160,12 +165,15 @@ void Player::pathFinderFinishedSearching(PathFinder* pathFinder, bool pathWasFou
 {
     if(pathFinder == m_PathFinder)
     {
-        startAnimating();
-    }
+        if(pathWasFound == true)
+        {
+            startAnimating();
+        }
     
-    else
-    {
+        else
+        {
         
+        }
     }
 }
 
@@ -173,16 +181,16 @@ PathFinder* Player::getPathFinder()
 {
     return m_PathFinder;
 }
-
+ 
 void Player::findPath()
 {
     m_PathFinder->reset();
     m_PathFinder->findPath(m_CurrentTile, m_DestinationTile);
 }
 
-float Player::animate(float aCurrent, float aTarget, double aDelta)
+float Player::animate(float aCurrent, float aTarget, double aDelta, float speed)
 {
-    float increment = aDelta * PLAYER_SPEED * (aTarget < aCurrent ? -1 : 1);
+    float increment = aDelta * m_Speed * (aTarget < aCurrent ? -1 : 1) * speed;
     if(fabs(increment) > fabs(aTarget - aCurrent))
     {
         return aTarget;

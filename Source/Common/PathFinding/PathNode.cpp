@@ -13,8 +13,8 @@
 
 PathNode::PathNode(Tile* tile) :
     m_Tile(tile),
-    m_ScoreG(0),
-    m_ScoreH(0),
+    m_ScoreG(0.0f),
+    m_ScoreH(0.0f),
     m_ParentNode(NULL)
 {
 
@@ -30,7 +30,7 @@ void PathNode::paintScore(OpenGLColor color)
 {
     if(m_Tile != NULL)
     {
-        if(getScoreF() != 0)
+        if(getScoreF() != 0.0f)
         {
             m_Tile->paintScore(color, getScoreG(), getScoreH(), getScoreF());
         }
@@ -42,19 +42,19 @@ Tile* PathNode::getTile()
     return m_Tile;
 }
 
-int PathNode::getScoreG()
+float PathNode::getScoreG()
 {
     return m_ScoreG;
 }
 
-int PathNode::getScoreH()
+float PathNode::getScoreH()
 {
     return m_ScoreH;
 }
 
-int PathNode::getScoreF()
+float PathNode::getScoreF()
 {
-    return getScoreG()+ getScoreH();
+    return getScoreG() + getScoreH();
 }
 
 PathNode* PathNode::getParentNode()
@@ -62,12 +62,12 @@ PathNode* PathNode::getParentNode()
     return m_ParentNode;
 }
 
-void PathNode::setScoreG(int scoreG)
+void PathNode::setScoreG(float scoreG)
 {
     m_ScoreG = scoreG;
 }
 
-void PathNode::setScoreH(int scoreH)
+void PathNode::setScoreH(float scoreH)
 {
     m_ScoreH = scoreH;
 }
@@ -81,10 +81,3 @@ bool PathNode::compareNodes(PathNode* nodeA, PathNode* nodeB)
 {
     return nodeA->getScoreF() < nodeB->getScoreF();
 }
-
-
-
-
-
-
-

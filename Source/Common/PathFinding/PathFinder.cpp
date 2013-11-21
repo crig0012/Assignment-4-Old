@@ -35,11 +35,18 @@ PathFinder::~PathFinder()
 
 void PathFinder::findPath(Tile* aCurrentTile, Tile* aDestinationTile)
 {
+    //Safety check that the state is idle, if it isn't then a path is already found and in the process of being found
     if(m_State != StateIdle)
 	{
 		return;
 	}
+    
+    if(aCurrentTile == NULL)
+    {
+        return;
+    }
 
+    //Cycle through and reset all the tile path flags to false
 	for(int i = 0; i < m_Level->getNumberOfTiles(); i++)
 	{
 		Tile* tile = m_Level->getTileForIndex(i);
@@ -49,25 +56,33 @@ void PathFinder::findPath(Tile* aCurrentTile, Tile* aDestinationTile)
 		}
 	}
 
+    //Clear the path nodes
 	clearPathNodes();
 
+    //Get the current tile and destination tile indexes
 	int currentTileIndex = m_Level->getTileIndexForTile(aCurrentTile);
 	m_DestinationTileIndex = m_Level->getTileIndexForTile(aDestinationTile);
 
+    //Safety check that the destination tile and the current tile indexes aren't the same
 	if(currentTileIndex == m_DestinationTileIndex)
 	{
 		return;
 	}
 
+    //Safety check that the destination tile is walkable
 	if(aDestinationTile->isWalkableTile() == false)
 	{
 		return;
 	}
 
+    //Allocate the current tile's path node and add it to the open list
 	PathNode* pathNode = new PathNode(aCurrentTile);
 	addPathNodeToOpenList(pathNode);
 
+    //Set the state to searching
 	m_State = StateSearchingPath;
+    
+    //Set the search delay to 0
 	m_SearchDelay = 0.0f;
 }
 
@@ -97,7 +112,7 @@ void PathFinder::update(double aDelta)
 
 			return;
 		}
-	}
+	
     
 	PathNode* currentNode = m_PathNodeOpen.front();
 
@@ -141,7 +156,7 @@ void PathFinder::update(double aDelta)
 			
 			adjacentNode->setParentNode(currentNode);
 
-			adjacentNode->setScoreG(currentNode->getScoreG() + 1);
+			adjacentNode->setScoreG(currentNode->getScoreG() + adjacentTile->getMovementCost());
 
 			Tile* destinationTile = m_Level->getTileForIndex(m_DestinationTileIndex);
 			int scoreH = getManhattanDistanceCost(adjacentTile, destinationTile);
@@ -154,9 +169,9 @@ void PathFinder::update(double aDelta)
 		{
 			PathNode* existingNode = getOpenPathNodeForTile(adjacentTile);
 			
-			if(currentNode->getScoreG() +1 < existingNode->getScoreG())
+			if(currentNode->getScoreG() +adjacentTile->getMovementCost() < existingNode->getScoreG())
 			{
-				existingNode->setScoreG(currentNode->getScoreG() + 1);
+				existingNode->setScoreG(currentNode->getScoreG() + adjacentTile->getMovementCost());
 				existingNode->setParentNode(currentNode);
 
 				sortOpenList();
@@ -164,6 +179,7 @@ void PathFinder::update(double aDelta)
 		}
 	}
 
+    }
     //If the search delay is enabled, set the delay timer
     if(m_EnableSearchDelay == true)
     {
@@ -206,6 +222,7 @@ void PathFinder::addAdjacentTile(std::vector<Tile*>& aAdjacentTiles, Tile* aCurr
 
 	if(adjacentTile != NULL)
 	{
+        //Is the tile walkable and valid( ie not outside the bounds of the level )
 		bool isWalkable = adjacentTile->isWalkableTile();
 		bool isValid = m_Level->validateTileCoordinates(adjacentCoordinateX, adjacentCoordinateY);
 
