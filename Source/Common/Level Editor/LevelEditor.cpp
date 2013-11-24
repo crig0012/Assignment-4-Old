@@ -69,6 +69,14 @@ const char* LevelEditor::getName()
 	return LEVEL_EDITOR_SCREEN_NAME;
 }
 
+Level* LevelEditor::getLevel()
+{
+	if(m_Level != NULL)
+	{
+		return m_Level;
+	}
+}
+
 void LevelEditor::update(double delta)
 {
 	if(m_Level != NULL)

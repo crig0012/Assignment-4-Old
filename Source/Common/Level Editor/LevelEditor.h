@@ -22,6 +22,7 @@ public:
     ~LevelEditor();
     
     const char* getName();
+	Level* getLevel();
 
     void update(double delta);
     void paint();
