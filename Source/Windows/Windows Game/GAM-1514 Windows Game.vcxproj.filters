@@ -325,6 +325,15 @@
     <ClCompile Include="..\..\Common\UI\UIFont.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Enemy.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Hero.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Menus\Settings.cpp">
+      <Filter>Source Files\Menus</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -566,6 +575,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\UI\UIFont.h">
       <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Enemy.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Hero.h">
+      <Filter>Source Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Menus\Settings.h">
+      <Filter>Source Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Hero.h"
 #include "Enemy.h"
-#include "PathFinder.h"
+#include "../PathFinding/PathFinder.h"
 #include "Tiles/Tile.h"
 #include "Tiles/TreeTile.h"
 #include "Tiles/GroundTile.h"

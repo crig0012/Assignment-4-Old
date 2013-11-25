@@ -17,6 +17,7 @@ MainMenu::MainMenu() : Menu(NULL, NULL)
 {
     addButton(new UIButton("ButtonLoadLevel"));
     addButton(new UIButton("ButtonLevelEditor"));
+	addButton(new UIButton("ButtonSettings"));
     addButton(new UIButton("ButtonExit"));
 }
 
@@ -42,7 +43,11 @@ void MainMenu::buttonAction(UIButton* button)
     {
         ScreenManager::getInstance()->switchScreen(LEVEL_EDITOR_SCREEN_NAME);
     }
-    else if (index == 2)
+	if(index == 2)
+	{
+		ScreenManager::getInstance()->switchScreen(SETTINGS_SCREEN_NAME);
+	}
+    else if (index == 3)
     {
         exit(1);
     }

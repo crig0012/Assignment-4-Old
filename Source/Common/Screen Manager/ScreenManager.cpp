@@ -2,6 +2,7 @@
 #include "Screen.h"
 #include "../Game/Game.h"
 #include "../Menus/MainMenu.h"
+#include "../Menus/Settings.h"
 #include "../Level Editor/LevelEditor.h"
 #include <time.h>
 
@@ -55,6 +56,7 @@ void ScreenManager::loadScreens()
     addScreen(new MainMenu());
 	addScreen(new Game());
     addScreen(new LevelEditor());
+	addScreen(new Settings());
 }
 
 void ScreenManager::setScreenSize(float aWidth, float aHeight)

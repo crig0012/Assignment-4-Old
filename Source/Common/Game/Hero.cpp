@@ -8,7 +8,7 @@
 
 #include "Hero.h"
 #include "Level.h"
-#include "Tile.h"
+#include "../Game/Tiles/Tile.h"
 #include "../Constants/Constants.h"
 
 Hero::Hero(Level* level) : Player(level)

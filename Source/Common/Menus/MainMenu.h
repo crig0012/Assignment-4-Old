@@ -20,6 +20,8 @@ public:
     
     const char* getName();
 
+	void backToMain();
+
 private:
     void buttonAction(UIButton* button);
 };

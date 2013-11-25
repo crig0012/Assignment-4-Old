@@ -27,6 +27,7 @@ enum TileType
 
 //Level editor screen name
 extern const char* LEVEL_EDITOR_SCREEN_NAME;
+extern const char* SETTINGS_SCREEN_NAME;
 extern const char* SAVE_SCREEN_NAME;
 extern const char* LOAD_SCREEN_NAME;
 

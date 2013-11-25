@@ -11,7 +11,7 @@
 #include "Tiles/Tile.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
-#include "PathNode.h"
+#include "../PathFinding/PathNode.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>

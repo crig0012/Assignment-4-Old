@@ -97,8 +97,10 @@
     <ClCompile Include="..\..\Common\Constants\Level\LevelConstants.cpp" />
     <ClCompile Include="..\..\Common\Constants\Menu\MenuConstants.cpp" />
     <ClCompile Include="..\..\Common\Constants\Resources\ResourceConstants.cpp" />
+    <ClCompile Include="..\..\Common\Game\Enemy.cpp" />
     <ClCompile Include="..\..\Common\Game\Game.cpp" />
     <ClCompile Include="..\..\Common\Game\GameObject.cpp" />
+    <ClCompile Include="..\..\Common\Game\Hero.cpp" />
     <ClCompile Include="..\..\Common\Game\Level.cpp" />
     <ClCompile Include="..\..\Common\Game\Player.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\ChestTile.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="..\..\Common\Math\GDRandomSearch.cpp" />
     <ClCompile Include="..\..\Common\Menus\MainMenu.cpp" />
     <ClCompile Include="..\..\Common\Menus\Menu.cpp" />
+    <ClCompile Include="..\..\Common\Menus\Settings.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLAnimatedTexture.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLRenderer.cpp" />
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTexture.cpp" />
@@ -180,8 +183,10 @@
     <ClInclude Include="..\..\Common\Constants\Level\LevelConstants.h" />
     <ClInclude Include="..\..\Common\Constants\Menu\MenuConstants.h" />
     <ClInclude Include="..\..\Common\Constants\Resources\ResourceConstants.h" />
+    <ClInclude Include="..\..\Common\Game\Enemy.h" />
     <ClInclude Include="..\..\Common\Game\Game.h" />
     <ClInclude Include="..\..\Common\Game\GameObject.h" />
+    <ClInclude Include="..\..\Common\Game\Hero.h" />
     <ClInclude Include="..\..\Common\Game\Level.h" />
     <ClInclude Include="..\..\Common\Game\Player.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\ChestTile.h" />
@@ -230,6 +235,7 @@
     <ClInclude Include="..\..\Common\Math\GDRandomSearch.h" />
     <ClInclude Include="..\..\Common\Menus\MainMenu.h" />
     <ClInclude Include="..\..\Common\Menus\Menu.h" />
+    <ClInclude Include="..\..\Common\Menus\Settings.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGL.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLAnimatedTexture.h" />
     <ClInclude Include="..\..\Common\OpenGL\OpenGLBuffer.h" />
