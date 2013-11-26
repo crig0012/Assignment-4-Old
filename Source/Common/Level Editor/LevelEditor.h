@@ -13,6 +13,7 @@
 #include "../UI/UISideMenu.h"
 
 class UISideMenu;
+class SaveLoad;
 class Level;
 
 class LevelEditor : public Screen, public UISideMenuListener
@@ -40,6 +41,7 @@ private:
     UISideMenu* m_TilesMenu;
 	UISideMenu* m_OptionsMenu;
     Level* m_Level;
+	SaveLoad* m_SaveLoad;
     
     bool m_IsMouseDown;
     int m_SelectedTileIndex;

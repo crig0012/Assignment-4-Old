@@ -11,6 +11,7 @@
 
 #include "Menu.h"
 
+class SaveLoad;
 
 class MainMenu : public Menu
 {
@@ -22,6 +23,7 @@ public:
 
 private:
     void buttonAction(UIButton* button);
+	SaveLoad* m_SaveLoad;
 };
 
 #endif /* defined(__GAM_1514_OSX_Game__MainMenu__) */

@@ -12,6 +12,7 @@
 #include "../Screen Manager/ScreenManager.h"
 #include "../UI/UIButton.h"
 #include "../UI/UIToggle.h"
+#include "../Menus/SaveLoad.h"
 
 
 LevelEditor::LevelEditor() :
@@ -204,6 +205,8 @@ void LevelEditor::keyUpEvent(int keyCode)
 
 	if(keyCode == KEYCODE_S)
 	{
+		m_SaveLoad = new SaveLoad();
+		m_SaveLoad->setOrigin(1);		
 		ScreenManager::getInstance()->switchScreen(SAVE_LOAD_SCREEN_NAME);
 	}
 }

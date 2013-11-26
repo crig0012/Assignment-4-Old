@@ -17,9 +17,12 @@ public:
 
 	const char* getName();
 
+	void setOrigin(int origin);
+
 private:
 	void buttonAction(UIButton* button);
 	LevelEditor m_LevelEditor;
+	int m_Origin;
 	//Level m_Level;
 };
 

@@ -11,6 +11,7 @@
 #include "../Game/Game.h"
 #include "../Game/Level.h"
 #include "../Screen Manager/ScreenManager.h"
+#include "../Menus/SaveLoad.h"
 
 
 MainMenu::MainMenu() : Menu(NULL, NULL)
@@ -35,7 +36,9 @@ void MainMenu::buttonAction(UIButton* button)
     int index = getIndexForButton(button);
     if(index == 0)
     {
-        ScreenManager::getInstance()->switchScreen(GAME_SCREEN_NAME);
+		m_SaveLoad = new SaveLoad();
+		m_SaveLoad->setOrigin(0);
+        ScreenManager::getInstance()->switchScreen(SAVE_LOAD_SCREEN_NAME);
     }
     else if(index == 1)
     {

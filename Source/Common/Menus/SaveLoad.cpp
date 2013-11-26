@@ -23,6 +23,13 @@ const char* SaveLoad::getName()
 	return SAVE_LOAD_SCREEN_NAME;
 }
 
+void SaveLoad::setOrigin(int origin)
+{
+	m_Origin = origin;
+}
+
+//setOrigin(int origin) this takes in an int which is sent by the orderer. So, main menu has //SaveLoad->setOrigin(0), loading from the editor will be //SaveLoad->setOrigin(2), etc
+//Then have a switch(index(of the button, so slot 1 is index 0)) nested in an if(origin != 1(because 1 is save))
 void SaveLoad::buttonAction(UIButton* button)
 {
 	/*
@@ -34,6 +41,17 @@ void SaveLoad::buttonAction(UIButton* button)
 	back
 	*/
     int index = getIndexForButton(button);
+
+	if(m_Origin != 1)
+	{
+		//load
+	}
+
+	else
+	{
+		//save
+	}
+
     if(index == 0)
     {
 		m_LevelEditor.getLevel()->save("Slot1.bin");
