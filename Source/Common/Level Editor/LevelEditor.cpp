@@ -284,21 +284,13 @@ void LevelEditor::keyUpEvent(int keyCode)
 
 		m_OptionsMenu->isShowing() == true ? m_OptionsMenu->hide() : m_OptionsMenu->show();
 	}
-
-	else
-	{
-		if(m_Level != NULL)
-		{
-			m_Level->keyUpEvent(keyCode);
-		}
-	}
-
-	if(keyCode == KEYCODE_C)
+    
+	else if(keyCode == KEYCODE_C)
 	{
 		m_Level->randomizeLevel();
 	}
 
-	if(keyCode == KEYCODE_S)
+	else if(keyCode == KEYCODE_S)
 	{
 		if(m_TilesMenu->isShowing() == true)
 			m_TilesMenu->hide();
@@ -306,12 +298,36 @@ void LevelEditor::keyUpEvent(int keyCode)
 		m_SaveMenu->isShowing() == true ? m_SaveMenu->hide() : m_SaveMenu->show();
 	}
 
-	if(keyCode == KEYCODE_L)
+	else if(keyCode == KEYCODE_L)
 	{
 		if(m_OptionsMenu->isShowing() == true)
 			m_OptionsMenu->hide();
 
 		m_LoadMenu->isShowing() == true ? m_LoadMenu->hide() : m_LoadMenu->show();
+	}
+    
+    else if(keyCode == KEYCODE_T)
+    {
+        if(m_Level != NULL)
+        {
+            m_Level->setPickupTypeAtIndex(PickupTypeAmmo, 101);
+        }
+    }
+    
+    else if(keyCode == KEYCODE_Y)
+    {
+        if(m_Level != NULL)
+        {
+            m_Level->setPickupTypeAtIndex(PickupTypeUnkown, 101);
+        }
+    }
+    
+    else
+	{
+		if(m_Level != NULL)
+		{
+			m_Level->keyUpEvent(keyCode);
+		}
 	}
 }
 

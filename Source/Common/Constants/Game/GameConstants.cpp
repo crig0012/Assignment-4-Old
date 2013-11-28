@@ -30,3 +30,6 @@ const char* HERO_TYPE = "Hero";
 //Enemy Constants
 const char* ENEMY_TYPE = "Enemy";
 const int ENEMY_COUNT = 10;
+
+//Pickup Constants
+const char* AMMO_PICKUP_TYPE = "AmmoPickup";

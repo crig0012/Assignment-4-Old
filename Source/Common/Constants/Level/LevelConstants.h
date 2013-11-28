@@ -13,16 +13,28 @@
 //add additional tile types in this enum
 enum TileType
 {
-  TileTypeGround = 0,
-  TileTypeWater,
-  TileTypeTree,
-  TileTypeWall,
-  TileTypeTower,
-  TileTypeChest,
-  TileTypeCount,
+  TileTypeGround = 1,   //(0000 0001)
+  TileTypeWater = 2,    //(0000 0010)
+  TileTypeTree = 4,     //(0000 0100)
+  TileTypeWall = 8,     //(0000 1000)
+  TileTypeTower = 16,   //(0001 0000)
+  TileTypeChest = 32,   //(0010 0000)
+    
+    //This Count value MUST now be manually updated when a new tile is added 
+  TileTypeCount = 6,   
   TileTypeSpawnHero,
   TileTypeSpawnEnemy,
-  TileTypeUnknown
+  TileTypeUnknown = -1
+};
+
+
+enum PickupType
+{
+    PickupTypeAmmo = 64,    //(0100 0000)
+    
+    //This Count value MUST now be manually updated when a new tile is added
+	PickupTypeCount = 1,
+	PickupTypeUnkown = -1
 };
 
 //Level editor screen name

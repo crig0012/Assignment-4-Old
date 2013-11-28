@@ -11,12 +11,14 @@
 
 #include "GameObject.h"
 #include "../PathFinding/PathFinder.h"
+#include "Projectile.h"
 #include <vector>
 
 class Level;
 class Tile;
+class Pickup;
 
-class Player : public GameObject, public PathFinderListener
+class Player : public GameObject, public PathFinderListener, public ProjectileListener
 {
 public:
 	Player(Level* level);
@@ -33,8 +35,18 @@ public:
   //Setter methods for the current and destination tiles
 	void setCurrentTile(Tile* tile);
 	void setDestinationTile(Tile* tile);
-
+    
+    //Projectile methods
+    void fireProjectile(float x, float y);
+    void applyDamage(int damage);
+    
 protected:
+    //Pickup method
+    void handlePickup(Pickup* pickup);
+    
+    //Projectile listener methods
+    virtual void handlePlayerCollision(Projectile* projectile) = 0;
+    virtual void handleBoundsCollision(Projectile* projectile) = 0;
     //PathFinder Listener method
     void pathFinderFinishedSearching(PathFinder* pathFinder, bool pathWasFound);
     
@@ -59,6 +71,10 @@ protected:
     bool m_AbortAnimation;
 	int m_AnimationPathNodeIndex;
     float m_Speed;
+    int m_Ammo;
+    
+    int m_Health;
+    std::vector<Projectile*> m_Projectiles;
 };
 
 #endif

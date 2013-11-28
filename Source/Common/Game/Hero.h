@@ -21,6 +21,13 @@ public:
     const char* getType();
     
     void mouseLeftClickUpEvent(float positionX, float positionY);
+    void mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY);
+    void keyUpEvent(int keyCode);
+
+    
+protected:
+    void handlePlayerCollision(Projectile* projectile);
+    void handleBoundsCollision(Projectile* projectile);
 };
 
 

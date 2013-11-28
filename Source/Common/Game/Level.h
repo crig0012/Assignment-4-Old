@@ -17,6 +17,7 @@ class Tile;
 class Player;
 class Hero;
 class Enemy;
+class Pickup;
 
 class Level
 {
@@ -34,11 +35,13 @@ public:
     void save(const char* levelName);
     
     //Input methods
+    void mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY);
     void mouseLeftClickUpEvent(float positionX, float positionY);
     void keyUpEvent(int keyCode);
 	
 	//
     TileType getTileTypeForIndex(int index);
+    PickupType getPickupTypeForIndex(int index);
     
 	//Tile count methods
     unsigned int getNumberOfTiles();
@@ -68,6 +71,11 @@ public:
     void setTileTypeAtCoordinates(TileType tileType, int coordinatesX, int coordinatesY);
     void setTileTypeAtIndex(TileType tileType, int index);
     
+    //Pickup set methods
+    void setPickupTypeAtPosition(PickupType pickupType, int positionX, int positionY);
+    void setPickupTypeAtCoordinates(PickupType pickupType, int coordinateX, int coordinateY);
+    void setPickupTypeAtIndex(PickupType pickupType, int index);
+    
     //Coveniance methods to toggle debug paint methods
     void togglePaintTileScoring();
     void togglePaintTileIndexes();
@@ -76,9 +84,11 @@ public:
     //Disables the old tiles selection (if ground tile) and
 	//enables the newly selected tiles selection (if ground tile)
 	void setSelectedTileIndex(int selectedIndex);
+    int getSelectedTileIndex();
     
     //Getter method for the Hero*
     Hero* getHero();
+    std::vector<Enemy*> getEnemies();
     
 protected:
 	//Protected Member variables

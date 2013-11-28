@@ -29,4 +29,7 @@ extern const char* HERO_TYPE;
 //Enemy Constants
 extern const char* ENEMY_TYPE;
 extern const int ENEMY_COUNT;
+
+//Pickup Constants
+extern const char* AMMO_PICKUP_TYPE;
 #endif 

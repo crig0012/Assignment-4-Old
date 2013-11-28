@@ -7,6 +7,7 @@
 //
 
 #include "Tile.h"
+#include "../../Pickups/Pickup.h"
 #include "../../OpenGL/OpenGL.h"
 #include "../../Utils/Utils.h"
 #include <stdlib.h>
@@ -22,6 +23,7 @@ Tile::Tile(TileType tileType, const char* tileTexture, bool aIsWalkableTile)
     m_IsWalkableTile = aIsWalkableTile;
     m_IsSelected = false;
     m_IsPath = false;
+    m_Pickup = NULL;
     
     //Create the tile texture
     if(tileTexture != NULL)
@@ -52,6 +54,13 @@ Tile::~Tile()
     //Set the textures to NULL
     m_Texture = NULL;
     m_SelectedTile = NULL;
+    
+    //Delete the pickup
+    if(m_Pickup != NULL)
+    {
+        delete m_Pickup;
+        m_Pickup = NULL;
+    }
     
     //Delete the tile index number OpenGLTextures
     if(m_TileIndexNumbers != NULL)
@@ -98,12 +107,24 @@ void Tile::paint()
     {
         OpenGLRenderer::getInstance()->drawTexture(m_SelectedTile, getX(), getY(), getWidth(), getHeight());
     }
+    
+    //Paint the pickup object
+    if(m_Pickup != NULL)
+    {
+        m_Pickup->paint();
+    }
 }
 
 void Tile::reset()
 {
     m_IsSelected = false;
     m_IsPath = false;
+    
+    //Reset the pickup object
+    if(m_Pickup != NULL)
+    {
+        m_Pickup->reset();
+    }
 }
 
 void Tile::paintScore(OpenGLColor color, int scoreG, int scoreH, int scoreF)
@@ -307,4 +328,22 @@ void Tile::setIsPath(bool aIsPath)
 bool Tile::isPath()
 {
 	return m_IsPath;
+}
+
+void Tile::setPickup(Pickup* pickup)
+{
+    //If the pickup pointer already points to a pickup object we need to delete it
+    if(m_Pickup != NULL)
+    {
+        delete m_Pickup;
+        m_Pickup = NULL;
+    }
+    
+    //Set the new pickup object to the m_Pickup pointer
+    m_Pickup = pickup;
+}
+
+Pickup* Tile::getPickup()
+{
+    return m_Pickup;
 }

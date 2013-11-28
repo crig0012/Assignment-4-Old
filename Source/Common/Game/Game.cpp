@@ -70,6 +70,14 @@ const char* Game::getName()
 	return GAME_SCREEN_NAME;
 }
 
+void Game::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
+{
+    if(m_Level != NULL)
+    {
+        m_Level->mouseMovementEvent(deltaX, deltaY, positionX, positionY);
+    }
+}
+
 Level* Game::getLevel()
 {
     return m_Level;

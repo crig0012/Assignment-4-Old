@@ -23,6 +23,11 @@ public:
     void update(double delta);
     void paint();
     void reset();
+    
+protected:
+    void handlePlayerCollision(Projectile* projectile);
+    void handleBoundsCollision(Projectile* projectile);
+    
 };
 
 #endif /* defined(__GAM_1514_OSX_Game__Enemy__) */

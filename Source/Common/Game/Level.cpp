@@ -18,6 +18,8 @@
 #include "Tiles/WallTile.h"
 #include "Tiles/TowerTile.h"
 #include "Tiles/ChestTile.h"
+#include "../Pickups/Pickup.h"
+#include "../Pickups/AmmoPickup.h"
 #include "../Constants/Constants.h"
 #include "../Input/Input.h"
 #include "../Screen Manager/ScreenManager.h"
@@ -142,7 +144,10 @@ void Level::update(double aDelta)
     //Update the enemy object
     for(int i = 0; i < m_Enemies.size(); i++)
     {
-        m_Enemies.at(i)->update(aDelta);
+        if(m_Enemies.at(i)->getIsActive() == true)
+        {
+            m_Enemies.at(i)->update(aDelta);
+        }
     }
 }
 
@@ -211,6 +216,12 @@ void Level::reset()
         players.push_back(m_Enemies.at(i));
     }
     
+    for(int i = 0; i < players.size(); i++)
+    {
+        players.at(i)->setCurrentTile(getTileForIndex(i));
+        players.at(i)->reset();
+    }
+    /*
     //Random number generator for the spawn indexes
     GDRandom random;
     random.randomizeSeed();
@@ -255,6 +266,15 @@ void Level::reset()
                 }
             }
         }
+     
+    }*/
+}
+
+void Level::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
+{
+    if(m_Hero != NULL)
+    {
+        m_Hero->mouseMovementEvent(deltaX, deltaY, positionX, positionY);
     }
 }
 
@@ -287,6 +307,13 @@ void Level::keyUpEvent(int keyCode)
             m_Hero->getPathFinder()->togglePathFindingDelay();
         }
     }
+    else
+    {
+        if(m_Hero != NULL)
+        {
+            m_Hero->keyUpEvent(keyCode);
+        }
+    }
 }
 
 void Level::load(const char* levelName)
@@ -296,22 +323,38 @@ void Level::load(const char* levelName)
 	if(levelName != NULL)
 	{
 		std::ifstream inputStream;
-		inputStream.open(levelName, std::ifstream::in | std::ifstream::binary);
+		inputStream.open(levelName, std::ofstream::in | std::ofstream::binary);
 
 		if(inputStream.is_open() == true)
 		{
 			inputStream.seekg(0, inputStream.end);
-			long long bufferSize = inputStream.tellg();
-
+			long long levelSize = inputStream.tellg();
 			inputStream.seekg(0, inputStream.beg);
 
-			char* buffer = new char[bufferSize];
-			inputStream.read(buffer, (int)bufferSize);
+			char* buffer = new char[levelSize];
+			inputStream.read(buffer, (int)levelSize);
 			inputStream.close();
 
-			for(int i = 0; i < bufferSize; i++)
+			for(int i = 0; i < levelSize; i++)
 			{
-				setTileTypeAtIndex((TileType)buffer[i], i);
+				
+                PickupType pickupType = PickupTypeUnkown;
+                
+                //Check to see if the buffer[i] contains the AmmoPickup bit
+                if(buffer[i] & PickupTypeAmmo > 0)
+                {
+                    //It does
+                    pickupType = PickupTypeAmmo;
+                    
+                    //Clear the AmmoPickup bit
+                    buffer[i] &= ~PickupTypeAmmo;
+                }
+                
+                //Set the tile type
+                setTileTypeAtIndex((TileType)buffer[i], i);
+                
+                //Set the pickup type
+                setPickupTypeAtIndex(pickupType, i);
 			}
 
 			delete [] buffer;
@@ -321,32 +364,10 @@ void Level::load(const char* levelName)
 
 	else
 	{
-		//Tile variables
-		int tileIndex = 0;
-		float tileX = 0.0f;
-		float tileY = 0.0f;
-
-		//Cycle through all the tiles and create them
-		for(int v = 0; v < getNumberOfVerticalTiles(); v++)
-		{
-			for(int h = 0; h < getNumberOfHorizontalTiles(); h++)
-			{
-				//The empty level will contain only ground tiles
-				m_Tiles[tileIndex] = new GroundTile();
-				m_Tiles[tileIndex]->setPosition(tileX, tileY);
-				m_Tiles[tileIndex]->setSize(m_TileSize, m_TileSize);
-
-				//Increment the tile index
-				tileIndex++;
-
-				//And increment the tile x position
-				tileX += m_TileSize;
-			}
-
-			//Increment the tile y position and reset the tile x position, since we started a new row
-			tileY += m_TileSize;
-			tileX = 0.0f;
-		}
+		for(int i = 0; i < getNumberOfTiles(); i++)
+        {
+            setTileTypeAtIndex(TileTypeGround, i);
+        }
 	}
 
 	//The level is loaded, reset everything
@@ -355,25 +376,31 @@ void Level::load(const char* levelName)
 
 void Level::save(const char* levelName)
 {
-	long long bufferSize = getNumberOfTiles();
-	char* buffer = new char[bufferSize];
+    if(levelName != NULL)
+    {
+        std::ofstream outputStream;
+        outputStream.open(levelName, std::ofstream::out);
 
-	for(int i = 0; i < bufferSize; i++)
-	{
-		buffer[i] = (char)getTileTypeForIndex(i);
-	}
-
-	std::ofstream outputStream;
-	outputStream.open(levelName, std::ofstream::out | std::ofstream::binary);
-
-	if(outputStream.is_open() == true)
-	{
-		outputStream.write(buffer, bufferSize);
-		outputStream.close();
-	}
-
-	delete [] buffer;
-	buffer = NULL;
+        if(outputStream.is_open() == true)
+        {
+            size_t levelSize = getNumberOfHorizontalTiles() * getNumberOfVerticalTiles();
+            char* levelData = new char[levelSize];
+            for(int i = 0; i < levelSize; i++)
+            {
+                levelData[i] = m_Tiles[i]->getTileType();
+                
+                //Save the tile's pickup if there is one
+                if(m_Tiles[i]->getPickup() != NULL && m_Tiles[i]->getPickup()->getPickupType() != PickupTypeUnkown)
+                {
+                    levelData[i] |= m_Tiles[i]->getPickup()->getPickupType();
+                }
+            }
+            outputStream.write((char*)levelData, levelSize * sizeof(char));
+            outputStream.close();
+            
+            delete[] levelData;
+        }  
+    }
 }
 
 TileType Level::getTileTypeForIndex(int index)
@@ -383,6 +410,18 @@ TileType Level::getTileTypeForIndex(int index)
 		return m_Tiles[index]->getTileType();
 	}
 	return TileTypeUnknown;
+}
+
+PickupType Level::getPickupTypeForIndex(int index)
+{
+    if(index >=0 && index < getNumberOfTiles())
+    {
+        if(m_Tiles[index]->getPickup() != NULL)
+        {
+            return m_Tiles[index]->getPickup()->getPickupType();
+        }
+    }
+    return PickupTypeUnkown;
 }
 
 unsigned int Level::getNumberOfTiles()
@@ -484,11 +523,12 @@ void Level::setTileTypeAtIndex(TileType tileType, int index)
 	//Safety check the index
 	if(index >= 0 && index < getNumberOfTiles())
 	{
+        //TODO: Find out why this isn't working
 		//Don't replace the tile if its the same type of tile that already exists
-		if(m_Tiles[index]->getTileType() == tileType)
-		{
-			return;
-		}
+		//if(m_Tiles[index]->getTileType() == tileType)
+		//{
+		//	return;
+		//}
 
 		//Delete the tile at the index, if one exists
 		if(m_Tiles[index] != NULL)
@@ -538,6 +578,76 @@ void Level::setTileTypeAtIndex(TileType tileType, int index)
 	}
 }
 
+void Level::setPickupTypeAtPosition(PickupType pickupType, int positionX, int positionY)
+{
+    setPickupTypeAtIndex(pickupType, getTileIndexForCoordinates(positionX, positionY));
+}
+
+void Level::setPickupTypeAtCoordinates(PickupType pickupType, int coordinateX, int coordinateY)
+{
+    setPickupTypeAtIndex(pickupType, getTileIndexForCoordinates(coordinateX, coordinateY));
+}
+
+void Level::setPickupTypeAtIndex(PickupType pickupType, int index)
+{
+    //Safety check the index
+    if(index >= 0 && index <= getNumberOfTiles())
+    {
+        //Don't replace the tile if a pickup of the same type already exists there
+        if(m_Tiles[index] != NULL && m_Tiles[index]->getPickup() != NULL)
+        {
+            if(m_Tiles[index]->getPickup()->getPickupType() == pickupType)
+            {
+                return;
+            }
+        }
+        
+        //Delete the pickup at the index, if one exists already
+        if(m_Tiles[index] != NULL)
+        {
+            if(m_Tiles[index]->getPickup() != NULL)
+            {
+                m_Tiles[index]->setPickup(NULL);
+            }
+            
+            //Create a new pickup object based on the PickupType
+            switch(pickupType)
+            {
+                case PickupTypeAmmo:
+                {
+                    GDRandom random;
+                    random.randomizeSeed();
+                    
+                    int min = 5;
+                    int max = 50;
+                    int ammo = min + random.random(max-min);
+                    
+                    m_Tiles[index]->setPickup(new AmmoPickup(ammo));
+                }
+                    break;
+                
+                //TODO: Make sure to add future pickups here for object creation
+                case PickupTypeUnkown:
+                    
+                default:
+                    break;
+            }
+            
+            //Set the pickups position and size
+            if(m_Tiles[index]->getPickup() != NULL)
+            {
+                int coordinateX = (index % getNumberOfHorizontalTiles());
+                int coordinateY = ((index - coordinateX) / getNumberOfHorizontalTiles());
+                
+                Pickup* pickup = m_Tiles[index]->getPickup();
+                float x = (coordinateX * m_TileSize) + (m_TileSize - pickup->getWidth()) / 2.0f;
+                float y = (coordinateY * m_TileSize) + (m_TileSize - pickup->getHeight()) / 2.0f;
+                pickup->setPosition(x, y);
+            }
+        }
+    }
+}
+
 void Level::togglePaintTileScoring()
 {
 	m_PaintTileScoring = !m_PaintTileScoring;
@@ -566,7 +676,18 @@ void Level::setSelectedTileIndex(int aSelectedIndex)
 	}
 }
 
+int Level::getSelectedTileIndex()
+{
+    return m_SelectedTileIndex;
+}
+
 Hero* Level::getHero()
 {
     return m_Hero;
 }
+
+std::vector<Enemy*> Level::getEnemies()
+{
+    return m_Enemies;
+}
+

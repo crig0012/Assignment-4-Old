@@ -7,25 +7,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "../Common/Game/Enemy.cpp"
-         timestampString = "406761400.393556"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "Enemy::paint()"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "../Common/Game/Level.cpp"
-         timestampString = "406763644.69761"
+         timestampString = "407367852.813164"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "437"
-         endingLineNumber = "437"
+         startingLineNumber = "476"
+         endingLineNumber = "476"
          landmarkName = "Level::getTileIndexForTile(Tile* aTile)"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,24 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "../Common/Game/Level.cpp"
-         timestampString = "406763784.677137"
+         timestampString = "407367852.813164"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "435"
-         endingLineNumber = "435">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "../Common/Game/Hero.cpp"
-         timestampString = "406764086.007179"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "39"
-         endingLineNumber = "39"
-         landmarkName = "Hero::mouseLeftClickUpEvent(float positionX, float positionY)"
-         landmarkType = "5">
+         startingLineNumber = "474"
+         endingLineNumber = "474">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -88,6 +62,19 @@
          startingLineNumber = "50"
          endingLineNumber = "50"
          landmarkName = "PathFinder::findPath(Tile* aCurrentTile, Tile* aDestinationTile)"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../Common/Game/Projectile.cpp"
+         timestampString = "407368536.999606"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "46"
+         endingLineNumber = "46"
+         landmarkName = "Projectile::paint()"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

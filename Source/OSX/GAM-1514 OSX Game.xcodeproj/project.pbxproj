@@ -100,6 +100,10 @@
 		B0822EB7182AB66900201C5E /* GDRandomSearch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0822EB4182AB66900201C5E /* GDRandomSearch.cpp */; };
 		B0B08E72183E98AE005A0A3E /* Hero.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B08E70183E98AE005A0A3E /* Hero.cpp */; };
 		B0B08E75183E98C3005A0A3E /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0B08E73183E98C2005A0A3E /* Enemy.cpp */; };
+		B0C658711847CC5600AB1C41 /* Projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C6586F1847CC5600AB1C41 /* Projectile.cpp */; };
+		B0C658741847CFF100AB1C41 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C658721847CFF100AB1C41 /* Settings.cpp */; };
+		B0C6587D1847DA8800AB1C41 /* AmmoPickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C658791847DA8800AB1C41 /* AmmoPickup.cpp */; };
+		B0C6587E1847DA8800AB1C41 /* Pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0C6587B1847DA8800AB1C41 /* Pickup.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -292,6 +296,14 @@
 		B0B08E84183EB72B005A0A3E /* SpawnPointEnemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpawnPointEnemy.h; sourceTree = "<group>"; };
 		B0B08E85183EB72B005A0A3E /* SpawnPointHero.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpawnPointHero.cpp; sourceTree = "<group>"; };
 		B0B08E86183EB72C005A0A3E /* SpawnPointHero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpawnPointHero.h; sourceTree = "<group>"; };
+		B0C6586F1847CC5600AB1C41 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		B0C658701847CC5600AB1C41 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
+		B0C658721847CFF100AB1C41 /* Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Settings.cpp; sourceTree = "<group>"; };
+		B0C658731847CFF100AB1C41 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		B0C658791847DA8800AB1C41 /* AmmoPickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AmmoPickup.cpp; sourceTree = "<group>"; };
+		B0C6587A1847DA8800AB1C41 /* AmmoPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmmoPickup.h; sourceTree = "<group>"; };
+		B0C6587B1847DA8800AB1C41 /* Pickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pickup.cpp; sourceTree = "<group>"; };
+		B0C6587C1847DA8800AB1C41 /* Pickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pickup.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +384,8 @@
 		694495F1181ABCA200E030C8 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				B0C658721847CFF100AB1C41 /* Settings.cpp */,
+				B0C658731847CFF100AB1C41 /* Settings.h */,
 				6944961D181ABE4B00E030C8 /* MainMenu.cpp */,
 				6944961E181ABE4B00E030C8 /* MainMenu.h */,
 				6944961F181ABE4B00E030C8 /* Menu.cpp */,
@@ -593,6 +607,7 @@
 		69BB408E1699BAA500B970A9 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				B0C658781847DA8800AB1C41 /* Pickups */,
 				69BB408F1699BAA500B970A9 /* Game.cpp */,
 				69BB40901699BAA500B970A9 /* Game.h */,
 				69449601181ABCFA00E030C8 /* GameObject.cpp */,
@@ -606,6 +621,8 @@
 				B0B08E71183E98AE005A0A3E /* Hero.h */,
 				B0B08E73183E98C2005A0A3E /* Enemy.cpp */,
 				B0B08E74183E98C3005A0A3E /* Enemy.h */,
+				B0C6586F1847CC5600AB1C41 /* Projectile.cpp */,
+				B0C658701847CC5600AB1C41 /* Projectile.h */,
 			);
 			name = Game;
 			path = ../../Common/Game;
@@ -746,6 +763,18 @@
 			);
 			name = Math;
 			path = ../../Common/Math;
+			sourceTree = "<group>";
+		};
+		B0C658781847DA8800AB1C41 /* Pickups */ = {
+			isa = PBXGroup;
+			children = (
+				B0C658791847DA8800AB1C41 /* AmmoPickup.cpp */,
+				B0C6587A1847DA8800AB1C41 /* AmmoPickup.h */,
+				B0C6587B1847DA8800AB1C41 /* Pickup.cpp */,
+				B0C6587C1847DA8800AB1C41 /* Pickup.h */,
+			);
+			name = Pickups;
+			path = ../Pickups;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -898,6 +927,10 @@
 				B0722B9B183D2B5E002A234E /* PathNode.cpp in Sources */,
 				B0B08E72183E98AE005A0A3E /* Hero.cpp in Sources */,
 				B0B08E75183E98C3005A0A3E /* Enemy.cpp in Sources */,
+				B0C658711847CC5600AB1C41 /* Projectile.cpp in Sources */,
+				B0C658741847CFF100AB1C41 /* Settings.cpp in Sources */,
+				B0C6587D1847DA8800AB1C41 /* AmmoPickup.cpp in Sources */,
+				B0C6587E1847DA8800AB1C41 /* Pickup.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

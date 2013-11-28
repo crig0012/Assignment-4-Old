@@ -9,9 +9,12 @@
 #include "Player.h"
 #include "Level.h"
 #include "Tiles/Tile.h"
+#include "../Pickups/AmmoPickup.h"
 #include "../OpenGL/OpenGL.h"
 #include "../Constants/Constants.h"
 #include "../PathFinding/PathNode.h"
+#include "../Utils/Utils.h"
+#include "Projectile.h"
 #include <stdlib.h>
 #include <algorithm>
 #include <math.h>
@@ -34,6 +37,10 @@ Player::Player(Level* aLevel)
     //Set the player speed
     m_Speed = PLAYER_SPEED;
     
+    //Initialize the ammo and the health
+    m_Ammo = 10;
+    m_Health = 3;
+    
     //Initialize the player's size
     setSize(PLAYER_SIZE, PLAYER_SIZE);
 }
@@ -53,6 +60,35 @@ Player::~Player()
 
 void Player::update(double aDelta)
 {
+    //Update the projectiles
+    for(int i = 0; i < m_Projectiles.size(); i++)
+    {
+        if(m_Projectiles.at(i)->getIsActive() == true)
+        {
+            m_Projectiles.at(i)->update(aDelta);
+        }
+    }
+    
+    //Remove any inactive projectiles from the projectiles vector
+    int index = 0;
+    while(index != m_Projectiles.size())
+    {
+        if(m_Projectiles.at(index)->getIsActive() == false)
+        {
+            Log::debug("Deleting projectile");
+            
+            //delete the projectile and remove it from the vector
+            delete m_Projectiles.at(index);
+            m_Projectiles.erase(m_Projectiles.begin() + index);
+        }
+        
+        else
+        {
+            index++;
+        }
+    }
+    
+    //Update the path finder
     if(m_PathFinder->isSearchingPath() == true)
     {
         m_PathFinder->update(aDelta);
@@ -93,6 +129,15 @@ void Player::update(double aDelta)
                 //Set the new current tile
                 setCurrentTile(tile);
                 
+                //Does the tile have a pickup on it
+                if(tile->getPickup() != NULL)
+                {
+                    handlePickup(tile->getPickup());
+                    
+                    //Set the tile's pick to NULL, since it was picked up
+                    tile->setPickup(NULL);
+                }
+                
                 //Are we done animating completely?
                 if(m_AnimationPathNodeIndex >= m_PathFinder->getPathSize())
                 {
@@ -120,6 +165,15 @@ void Player::paint()
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, 90);
 	OpenGLRenderer::getInstance()->setForegroundColor(PLAYER_OUTLINE_COLOR);
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, 90, false);
+    
+    //Cycle through and paint all the 'active' projectiles
+    for(int i = 0; i < m_Projectiles.size(); i++)
+    {
+        if(m_Projectiles.at(i)->getIsActive() == true)
+        {
+            m_Projectiles.at(i)->paint();
+        }
+    }
 }
 
 void Player::reset()
@@ -132,6 +186,49 @@ void Player::reset()
     
     //Set the destination tile to null
     m_DestinationTile = NULL;
+    
+    //Set the player's state to 'active'
+    setIsActive(true);
+}
+
+void Player::fireProjectile(float x, float y)
+{
+    //Safety check that there is ammo left
+    if(m_Ammo > 0)
+    {
+        m_Ammo--;
+        
+        //Create a new projectile object
+        Projectile* projectile = new Projectile(this, 1, 10.0f);
+        projectile->setPosition(getX() + (getWidth() / 2.0f), getY() + (getHeight() / 2.0f));
+        projectile->setTarget(x, y);
+        m_Projectiles.push_back(projectile);
+        
+        Log::debug("Fired projectile, %i ammo left", m_Ammo);
+    }
+    
+    else
+    {
+        Log::debug("Can't fire projectile, %i ammo left", m_Ammo);
+    }
+}
+
+void Player::applyDamage(int damage)
+{
+    m_Health -= damage;
+    
+    if(m_Health <= 0)
+    {
+        m_Health = 0;
+        setIsActive(false);
+        
+        Log::debug("Player is dead");
+    }
+    
+    else
+    {
+        Log::debug("Player os hit, %i health remaining", m_Health);
+    }
 }
 
 void Player::setCurrentTile(Tile* tile)
@@ -158,6 +255,31 @@ void Player::setDestinationTile(Tile* tile)
     else
     {
         m_AbortAnimation = true;
+    }
+}
+
+void Player::handleBoundsCollision(Projectile* projectile)
+{
+    Tile* tile = m_Level->getTileForPosition(projectile->getX(), projectile->getY());
+    if(tile == NULL)
+    {
+        //If the tile onject is null, it means the projectile is no longer in the level
+        projectile->setIsActive(false);
+        
+        Log::debug("Projectile went off screen");
+    }
+}
+
+void Player::handlePickup(Pickup *pickup)
+{
+    switch (pickup->getPickupType())
+    {
+        case PickupTypeAmmo:
+            m_Ammo += ((AmmoPickup*)pickup)->getAmmoCount();
+            break;
+            
+        default:
+            break;
     }
 }
 

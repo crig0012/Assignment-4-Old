@@ -15,13 +15,14 @@
 
 
 class OpenGLTexture;
+class Pickup;
 
 class Tile : public GameObject
 {
 public:
     //Tile takes on parameter, whether it can be walked on or not
 	Tile(TileType tileType, const char* tileTexture, bool isWalkableTile);
-	virtual ~Tile();
+	~Tile();
     
     //Update, Paint and reset methods
 	virtual void update(double delta);
@@ -53,6 +54,9 @@ public:
 	virtual void setIsPath(bool isPath);
 	virtual bool isPath();
     
+    virtual void setPickup(Pickup* pickup);
+    virtual Pickup* getPickup();
+    
 protected:
     enum ScoreNumberPosition
     {
@@ -73,6 +77,7 @@ protected:
     OpenGLTexture* m_SelectedTile;
     OpenGLTexture** m_TileIndexNumbers;
     OpenGLTexture** m_TileScoreNumbers;
+    Pickup* m_Pickup;
 };
 
 #endif

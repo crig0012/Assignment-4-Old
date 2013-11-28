@@ -15,6 +15,7 @@
 Enemy::Enemy(Level* level, float speed) : Player(level)
 {
     m_Speed = speed;
+    m_Health = 1;
 }
 
 Enemy::~Enemy()
@@ -50,4 +51,18 @@ void Enemy::paint()
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, 90);
 	OpenGLRenderer::getInstance()->setForegroundColor(PLAYER_OUTLINE_COLOR);
 	OpenGLRenderer::getInstance()->drawCircle(getX() + (getWidth() / 2), getY() + (getHeight() / 2), getWidth() / 2, 90, false);
+}
+
+void Enemy::handlePlayerCollision(Projectile* projectile)
+{
+    //TODO: Handle hero collision with an enemy projectile
+}
+
+void Enemy::handleBoundsCollision(Projectile *projectile)
+{
+    Tile* tile = m_Level->getTileForPosition(projectile->getX(), projectile->getY());
+    if(tile == NULL)
+    {
+        projectile->setIsActive(false);
+    }
 }
