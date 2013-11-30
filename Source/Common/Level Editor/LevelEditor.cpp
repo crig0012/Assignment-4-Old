@@ -213,7 +213,10 @@ void LevelEditor::mouseMovementEvent(float deltaX, float deltaY, float positionX
 			m_SaveMenu->isShowing() == false && 
 			m_LoadMenu->isShowing() == false)
 		{
-			m_Level->setTileTypeAtPosition((TileType)m_SelectedTileIndex, positionX, positionY);
+            TileType types[] = {TileTypeGround, TileTypeWater, TileTypeTree, TileTypeWall, TileTypeTower, TileTypeChest};
+            TileType type = types[m_SelectedTileIndex];
+            
+			m_Level->setTileTypeAtPosition(type, positionX, positionY);
 		}
 	}
 }
@@ -238,7 +241,10 @@ void LevelEditor::mouseLeftClickUpEvent(float positionX, float positionY)
 			m_SaveMenu->isShowing() == false && 
 			m_LoadMenu->isShowing() == false)
 		{
-			m_Level->setTileTypeAtPosition((TileType)m_SelectedTileIndex, positionX, positionY);
+            TileType types[] = {TileTypeGround, TileTypeWater, TileTypeTree, TileTypeWall, TileTypeTower, TileTypeChest};
+            TileType type = types[m_SelectedTileIndex];
+            
+			m_Level->setTileTypeAtPosition(type, positionX, positionY);
 		}
 	}
 
