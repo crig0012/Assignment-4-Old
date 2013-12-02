@@ -83,6 +83,9 @@
     <Filter Include="Source Files\PathFinding">
       <UniqueIdentifier>{820bf180-30c1-445f-bac6-b47997a9926c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Pickups">
+      <UniqueIdentifier>{46500955-f018-4395-b8f2-214dfafc5639}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -334,6 +337,15 @@
     <ClCompile Include="..\..\Common\Menus\Settings.cpp">
       <Filter>Source Files\Menus</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Common\Pickups\AmmoPickup.cpp">
+      <Filter>Source Files\Pickups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Pickups\Pickup.cpp">
+      <Filter>Source Files\Pickups</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Common\Game\Projectile.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OpenGLWindow.h">
@@ -584,6 +596,15 @@
     </ClInclude>
     <ClInclude Include="..\..\Common\Menus\Settings.h">
       <Filter>Source Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Pickups\AmmoPickup.h">
+      <Filter>Source Files\Pickups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Pickups\Pickup.h">
+      <Filter>Source Files\Pickups</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Common\Game\Projectile.h">
+      <Filter>Source Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

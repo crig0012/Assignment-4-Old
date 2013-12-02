@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\Common\Game\Hero.cpp" />
     <ClCompile Include="..\..\Common\Game\Level.cpp" />
     <ClCompile Include="..\..\Common\Game\Player.cpp" />
+    <ClCompile Include="..\..\Common\Game\Projectile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\ChestTile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\GroundTile.cpp" />
     <ClCompile Include="..\..\Common\Game\Tiles\Tile.cpp" />
@@ -163,6 +164,8 @@
     <ClCompile Include="..\..\Common\OpenGL\OpenGLTextureManager.cpp" />
     <ClCompile Include="..\..\Common\PathFinding\PathFinder.cpp" />
     <ClCompile Include="..\..\Common\PathFinding\PathNode.cpp" />
+    <ClCompile Include="..\..\Common\Pickups\AmmoPickup.cpp" />
+    <ClCompile Include="..\..\Common\Pickups\Pickup.cpp" />
     <ClCompile Include="..\..\Common\Screen Manager\Screen.cpp" />
     <ClCompile Include="..\..\Common\Screen Manager\ScreenManager.cpp" />
     <ClCompile Include="..\..\Common\UI\UIButton.cpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="..\..\Common\Game\Hero.h" />
     <ClInclude Include="..\..\Common\Game\Level.h" />
     <ClInclude Include="..\..\Common\Game\Player.h" />
+    <ClInclude Include="..\..\Common\Game\Projectile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\ChestTile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\GroundTile.h" />
     <ClInclude Include="..\..\Common\Game\Tiles\Tile.h" />
@@ -247,6 +251,8 @@
     <ClInclude Include="..\..\Common\OpenGL\OpenGLTextureManager.h" />
     <ClInclude Include="..\..\Common\PathFinding\PathFinder.h" />
     <ClInclude Include="..\..\Common\PathFinding\PathNode.h" />
+    <ClInclude Include="..\..\Common\Pickups\AmmoPickup.h" />
+    <ClInclude Include="..\..\Common\Pickups\Pickup.h" />
     <ClInclude Include="..\..\Common\Screen Manager\Screen.h" />
     <ClInclude Include="..\..\Common\Screen Manager\ScreenManager.h" />
     <ClInclude Include="..\..\Common\UI\UIButton.h" />
