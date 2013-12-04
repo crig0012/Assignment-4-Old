@@ -40,6 +40,7 @@ private:
     
     UISideMenu* m_TilesMenu;
 	UISideMenu* m_OptionsMenu;
+    UISideMenu* m_PickupsMenu;
 	UISideMenu* m_SaveMenu;
 	UISideMenu* m_LoadMenu;
     Level* m_Level;

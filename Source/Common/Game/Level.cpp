@@ -41,6 +41,7 @@ m_HorizontalTiles(0),
 	m_PaintTileIndexes(false)
 {
 	//Create the hero object
+   
 	if(isEditingLevel == false)
 	{
 		m_Hero = new Hero(this);
@@ -322,6 +323,7 @@ void Level::load(const char* levelName)
 	//if it is NULL load an empty level with just ground tiles
 	if(levelName != NULL)
 	{
+        //levelName = "/Users/crig0012/Desktop/Assignment-4/Resources/SavesSlot1.bin";
 		std::ifstream inputStream;
 		inputStream.open(levelName, std::ofstream::in | std::ofstream::binary);
 

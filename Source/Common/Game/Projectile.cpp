@@ -13,7 +13,7 @@
 Projectile::Projectile(ProjectileListener * listener, int damage, float velocity) : GameObject(),
     m_Listener(listener),
     m_Damage(damage),
-    m_Velocity(velocity),
+    m_Velocity(velocity * 100),
     m_Angle(0.0f),
     m_TargetX(0.0f),
     m_TargetY(0.0f)
