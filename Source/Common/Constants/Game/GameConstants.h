@@ -26,6 +26,10 @@ extern const OpenGLColor PLAYER_OUTLINE_COLOR;
 //Hero Constants
 extern const char* HERO_TYPE;
 
+//Tower Constants
+extern const char* TOWER_TYPE;
+extern const int TOWER_COUNT;
+
 //Enemy Constants
 extern const char* ENEMY_TYPE;
 extern const int ENEMY_COUNT;

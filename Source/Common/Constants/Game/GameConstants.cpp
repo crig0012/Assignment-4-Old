@@ -27,6 +27,10 @@ const OpenGLColor PLAYER_OUTLINE_COLOR = OpenGLColor(1.0f, 1.0f, 1.0f, 1.0f);
 //Hero Constants
 const char* HERO_TYPE = "Hero";
 
+//Tower Constants
+const char* TOWER_TYPE = "Tower";
+const int TOWER_COUNT = 10;
+
 //Enemy Constants
 const char* ENEMY_TYPE = "Enemy";
 const int ENEMY_COUNT = 10;

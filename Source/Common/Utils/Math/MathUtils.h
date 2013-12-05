@@ -15,6 +15,7 @@
 #define fmaxf(a,b) ((a) > (b) ? (a) : (b))
 #endif
 
+class Level;
 
 class MathUtils
 {
@@ -27,7 +28,7 @@ public:
     static float degressToRadians(float degrees);
     
     //Are 2 values within a certain range with each other
-    static bool withinRange(float valueA, float valueB, float range); 
+    static bool withinRange(Level* level, float valueA, float valueB, float range);
 };
 
 #endif

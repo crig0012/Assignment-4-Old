@@ -18,6 +18,7 @@ class Player;
 class Hero;
 class Enemy;
 class Pickup;
+class Tower;
 
 class Level
 {
@@ -94,6 +95,7 @@ protected:
 	//Protected Member variables
 	Hero* m_Hero;
     std::vector<Enemy*> m_Enemies;
+    std::vector<Tower*> m_Towers;
 	Tile** m_Tiles;
 	unsigned int m_HorizontalTiles;
 	unsigned int m_VerticalTiles;

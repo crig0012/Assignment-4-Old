@@ -39,7 +39,7 @@ Player::Player(Level* aLevel)
     
     //Initialize the ammo and the health
     m_Ammo = 10;
-    m_Health = 3;
+    m_Health = 1;
     
     //Initialize the player's size
     setSize(PLAYER_SIZE, PLAYER_SIZE);

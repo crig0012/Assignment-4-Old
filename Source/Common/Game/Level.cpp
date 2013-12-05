@@ -27,6 +27,7 @@
 #include <stdio.h>
 #include <fstream>
 #include "../Math/GDRandomSearch.h"
+#include "Tower.h"
 
 
 Level::Level(bool isEditingLevel) :
@@ -58,6 +59,12 @@ m_HorizontalTiles(0),
             float speed = min + random.random(max-min);
             Enemy* enemy = new Enemy(this, speed);
             m_Enemies.push_back(enemy);
+        }
+        
+        for(int i = 0; i < TOWER_COUNT; i ++)
+        {
+            Tower* tower = new Tower(this);
+            m_Towers.push_back(tower);
         }
 	}
 
@@ -94,6 +101,13 @@ Level::~Level()
         m_Enemies.at(i) = NULL;
     }
     
+    for(int i = 0; i < m_Towers.size(); i++)
+    {
+        delete m_Towers.at(i);
+        m_Towers.at(i) = NULL;
+    }
+    
+    m_Towers.clear();
     m_Enemies.clear();
     
 	//Delete the tiles array, the inheriting class
@@ -150,6 +164,14 @@ void Level::update(double aDelta)
             m_Enemies.at(i)->update(aDelta);
         }
     }
+    
+    for(int i = 0; i < m_Towers.size(); i++)
+    {
+        if(m_Towers.at(i)->getIsActive() == true)
+        {
+            m_Towers.at(i)->update(aDelta);
+        }
+    }
 }
 
 void Level::paint()
@@ -191,6 +213,12 @@ void Level::paint()
     {
         m_Enemies.at(i)->paint();
     }
+    
+    //Paint the towers
+    for(int i =0; i < m_Towers.size(); i++)
+    {
+        m_Towers.at(i)->paint();
+    }
 }
 
 void Level::reset()
@@ -212,7 +240,7 @@ void Level::reset()
         players.push_back(m_Hero);
     }
     
-    for(int i =0; i < m_Enemies.size(); i++)
+    for(int i = 0; i < m_Enemies.size(); i++)
     {
         players.push_back(m_Enemies.at(i));
     }
@@ -222,7 +250,7 @@ void Level::reset()
         players.at(i)->setCurrentTile(getTileForIndex(i));
         players.at(i)->reset();
     }
-    /*
+    
     //Random number generator for the spawn indexes
     GDRandom random;
     random.randomizeSeed();
@@ -231,7 +259,7 @@ void Level::reset()
     std::vector<int> spawnPoints;
     
     //Cycle through the Players objects
-    for(int i = 0; i < players.size()/2; i++)
+    for(int i = 0; i < m_Towers.size(); i++)
     {
         //Set tileIndex to -1
         tileIndex = -1;
@@ -261,14 +289,14 @@ void Level::reset()
                 //Saftey check that tileIndex isn't -1
                 if(tileIndex != -1)
                 {
-                    players.at(i)->setCurrentTile(getTileForIndex(tileIndex));
-                    players.at(i)->reset();
+                    m_Towers.at(i)->setCurrentTile(getTileForIndex(tileIndex));
+                    m_Towers.at(i)->reset();
                     usedTileIndexes.push_back(tileIndex);
                 }
             }
         }
      
-    }*/
+    }
 }
 
 void Level::mouseMovementEvent(float deltaX, float deltaY, float positionX, float positionY)
@@ -307,6 +335,10 @@ void Level::keyUpEvent(int keyCode)
         {
             m_Hero->getPathFinder()->togglePathFindingDelay();
         }
+    }
+    else if (keyCode == KEYCODE_T)
+    {
+        
     }
     else
     {

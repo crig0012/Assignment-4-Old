@@ -9,6 +9,8 @@
 #include "MathUtils.h"
 #include <math.h>
 #include <stdlib.h>
+#include "Level.h"
+#include "Tile.h"
 
 
 unsigned int MathUtils::nextPowerOf2(unsigned int aValue)
@@ -33,7 +35,21 @@ float MathUtils::degressToRadians(float aDegrees)
     return aDegrees * (M_PI / 180.0f);
 }
 
-bool MathUtils::withinRange(float valueA, float valueB, float range)
+bool MathUtils::withinRange(Level* level, float valueA, float valueB, float range)
 {
-    return fabsf(valueA - valueB) < range;
+    Tile* tileA = level->getTileForIndex(valueA);
+    Tile* tileB = level->getTileForIndex(valueB);
+    
+    float centerXA = tileA->getX() + (tileA->getWidth() / 2.0f);
+    float centerYA = tileA->getY() + (tileA->getHeight() / 2.0f);
+
+    float centerXB = tileB->getX() + (tileB->getWidth() / 2.0f);
+    float centerYB = tileB->getY() + (tileB->getHeight() / 2.0f);
+    
+    float squaredX = (centerXB - centerXA) * (centerXB - centerXA);
+    float squaredY = (centerYB - centerYA) * (centerYB - centerYA);
+    
+    float distance = sqrtf(squaredX + squaredY);
+    
+    return fabsf(distance) < range;
 }
