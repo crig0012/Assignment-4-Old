@@ -9,26 +9,28 @@
 #ifndef __GAM_1514_OSX_Game__Tower__
 #define __GAM_1514_OSX_Game__Tower__
 
-#include <iostream>
 #include "Player.h"
+#include "../../Constants/Constants.h"
 
 class Enemy;
 
 class Tower : public Player
 {
 public:
-    Tower(Level* level);
-    ~Tower();
+    Tower(Level* level, TowerType towerType);
+    virtual ~Tower();
     
-    const char* getType();
+    virtual const char* getType();
+    virtual TowerType getTowerType() = 0;
     
-    void update(double delta);
-    void paint();
-    void reset();    
+    virtual void update(double delta);
+    virtual void paint();
+    virtual void reset();
     
 protected:
     void handlePlayerCollision(Projectile* projectile);
     void handleBoundsCollision(Projectile* projectile);
+    TowerType m_TowerType;
     
 private:
     std::vector<Enemy*> m_EnemyArray;

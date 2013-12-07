@@ -8,9 +8,9 @@
 
 #include "Enemy.h"
 #include "Level.h"
-#include "../Game/Tiles/Tile.h"
+#include "../../Game/Tiles/Tile.h"
 #include "Hero.h"
-#include "../Constants/Constants.h"
+#include "../../Constants/Constants.h"
 
 Enemy::Enemy(Level* level, float speed) : Player(level)
 {

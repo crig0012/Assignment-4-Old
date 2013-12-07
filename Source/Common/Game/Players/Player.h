@@ -10,7 +10,7 @@
 #define PLAYER_H
 
 #include "GameObject.h"
-#include "../PathFinding/PathFinder.h"
+#include "../../PathFinding/PathFinder.h"
 #include "Projectile.h"
 #include <vector>
 

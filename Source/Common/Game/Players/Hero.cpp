@@ -8,10 +8,10 @@
 
 #include "Hero.h"
 #include "Level.h"
-#include "../Game/Tiles/Tile.h"
-#include "../Constants/Constants.h"
-#include "../Input/Input.h"
-#include "../Utils/Utils.h"
+#include "../../Game/Tiles/Tile.h"
+#include "../../Constants/Constants.h"
+#include "../../Input/Input.h"
+#include "../../Utils/Utils.h"
 #include "Enemy.h"
 
 

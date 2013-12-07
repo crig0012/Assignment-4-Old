@@ -28,6 +28,7 @@
 #include <fstream>
 #include "../Math/GDRandomSearch.h"
 #include "Tower.h"
+#include "BulletTower.h"
 
 
 Level::Level(bool isEditingLevel) :
@@ -63,8 +64,8 @@ m_HorizontalTiles(0),
         
         for(int i = 0; i < TOWER_COUNT; i ++)
         {
-            Tower* tower = new Tower(this);
-            m_Towers.push_back(tower);
+            BulletTower* BulletTower = new BulletTower(this);
+            m_Towers.push_back(bulletTower);
         }
 	}
 

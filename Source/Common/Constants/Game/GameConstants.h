@@ -28,6 +28,7 @@ extern const char* HERO_TYPE;
 
 //Tower Constants
 extern const char* TOWER_TYPE;
+extern const char* BULLET_TOWER_TYPE;
 extern const int TOWER_COUNT;
 
 //Enemy Constants

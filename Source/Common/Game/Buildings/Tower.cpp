@@ -9,16 +9,15 @@
 #include "Tower.h"
 #include "Hero.h"
 #include "Level.h"
-#include "../Game/Tiles/Tile.h"
-#include "../Constants/Constants.h"
-#include "../Input/Input.h"
-#include "../Utils/Utils.h"
+#include "../../Game/Tiles/Tile.h"
+#include "../../Input/Input.h"
+#include "../../Utils/Utils.h"
 #include "Enemy.h"
 
-
-Tower::Tower(Level* level) : Player(level)
+Tower::Tower(Level* level, TowerType towerType) : Player(level),
+    m_TowerType(towerType)
 {
-    m_Ammo = 1000;
+    m_Ammo = 10000;
 }
 
 Tower::~Tower()
@@ -96,6 +95,11 @@ const char* Tower::getType()
     return TOWER_TYPE;
 }
 
+TowerType Tower::getTowerType()
+{
+    return  m_TowerType;
+}
+
 void Tower::handlePlayerCollision(Projectile *projectile)
 {
     Tile* tile = m_Level->getTileForPosition(projectile->getX(), projectile->getY());
@@ -112,7 +116,7 @@ void Tower::handlePlayerCollision(Projectile *projectile)
             //Is the projectile on the same tile as the enemy?
             if(tile == enemyTile)
             {
-                Log::debug("Hero projectile hit an enemy at index %i", i);
+                Log::debug("Tower projectile hit an enemy at index %i", i);
                 
                 if(m_Level != NULL)
                 {

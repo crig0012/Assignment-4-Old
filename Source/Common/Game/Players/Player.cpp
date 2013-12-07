@@ -8,12 +8,12 @@
 
 #include "Player.h"
 #include "Level.h"
-#include "Tiles/Tile.h"
-#include "../Pickups/AmmoPickup.h"
-#include "../OpenGL/OpenGL.h"
-#include "../Constants/Constants.h"
-#include "../PathFinding/PathNode.h"
-#include "../Utils/Utils.h"
+#include "../Tiles/Tile.h"
+#include "../../Pickups/AmmoPickup.h"
+#include "../../OpenGL/OpenGL.h"
+#include "../../Constants/Constants.h"
+#include "../../PathFinding/PathNode.h"
+#include "../../Utils/Utils.h"
 #include "Projectile.h"
 #include <stdlib.h>
 #include <algorithm>

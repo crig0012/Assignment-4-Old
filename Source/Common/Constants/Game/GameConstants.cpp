@@ -29,6 +29,7 @@ const char* HERO_TYPE = "Hero";
 
 //Tower Constants
 const char* TOWER_TYPE = "Tower";
+const char* BULLET_TOWER_TYPE = "BulletTower";
 const int TOWER_COUNT = 10;
 
 //Enemy Constants
